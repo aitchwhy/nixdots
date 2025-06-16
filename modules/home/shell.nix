@@ -31,7 +31,15 @@
     # Type `z <pat>` to cd to some directory
     zoxide.enable = true;
 
-    # Better shell prmot!
+
+    zellij = {
+      enable = true;
+      settings = {
+        theme = "catppuccin";
+      };
+    };
+
+    # Better shell prompt!
     starship = {
       enable = true;
       settings = {
