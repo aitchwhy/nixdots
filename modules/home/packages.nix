@@ -19,6 +19,8 @@
     nix-info
     nixpkgs-fmt
 
+    # Developer tools
+    gh # GitHub CLI
 
     # On ubuntu, we need this less for `man home-configuration.nix`'s pager to
     # work.
@@ -38,7 +40,7 @@
     # Tmate terminal sharing.
     tmate = {
       enable = true;
-      #host = ""; #In case you wish to use a server other than tmate.io 
+      #host = ""; #In case you wish to use a server other than tmate.io
     };
   };
 }
