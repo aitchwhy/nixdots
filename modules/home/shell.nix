@@ -6,6 +6,7 @@
       enable = true;
       initExtra = ''
         # Custom bash profile goes here
+        alias pc="process-compose"
       '';
     };
 
@@ -16,6 +17,7 @@
       syntaxHighlighting.enable = true;
       envExtra = ''
         # Custom ~/.zshenv goes here
+
       '';
       profileExtra = ''
         # Custom ~/.zprofile goes here
@@ -25,17 +27,22 @@
       '';
       logoutExtra = ''
         # Custom ~/.zlogout goes here
+        alias pc="process-compose"
       '';
     };
 
     # Type `z <pat>` to cd to some directory
-    zoxide.enable = true;
-
+    zoxide = {
+      enable = true;
+    };
 
     zellij = {
       enable = true;
       settings = {
         theme = "catppuccin";
+        default_shell = "zsh";
+        default_layout = "main";
+
       };
     };
 
@@ -59,5 +66,89 @@
         };
       };
     };
+
+    uv = {
+      enable = true;
+      settings = {
+        packageManager = "nix";
+      };
+    };
+
+    direnv = {
+      enable = true;
+    };
+
+    atuin = {
+      enable = true;
+    };
+
+
+    # fzf = {
+    #   enable = true;
+    # };
+
+    # ripgrep = {
+    #   enable = true;
+    # };
+
+    # fd = {
+    #   enable = true;
+    # };
+
+    # obsidian = {
+    #   enable = true;
+    # };
+
+
+    # neovim = {
+    #   enable = true;
+    # };
+
+    # lazygit = {
+    #   enable = true;
+    # };
+
+    # lazydocker = {
+    #   enable = true;
+    # };
+
+    # htop = {
+    #   enable = true;
+    # };
+
+    # fastfetch = {
+    #   enable = true;
+    # };
+
+    # git = {
+    #   enable = true;
+    # };
+
+    # bat = {
+    #   enable = true;
+    # };
+
+    # jq = {
+    #   enable = true;
+    # };
+
+    # aerospace = {
+    #   enable = true;
+    # };
+
+    # codex = {
+    #   enable = true;
+    # };
+
+    # gh = {
+    #   enable = true;
+    # };
+
+    # nix-index.enable = true;
+
+  };
+
+  services = {
+    ollama.enable = true;
   };
 }
