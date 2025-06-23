@@ -15,9 +15,11 @@
 
     # Nix dev
     cachix
+    nom # nix build visualizer
     nil # Nix language server
     nix-info
     nixpkgs-fmt
+
 
     # Developer tools
     gh # GitHub CLI
@@ -25,6 +27,15 @@
     # On ubuntu, we need this less for `man home-configuration.nix`'s pager to
     # work.
     less
+
+    nom
+
+    # Programming languages
+    uv
+    python313
+    rustup
+    rust-analyzer
+
   ];
 
   # Programs natively supported by home-manager.
@@ -42,5 +53,9 @@
       enable = true;
       #host = ""; #In case you wish to use a server other than tmate.io
     };
+    nixd.enable = true;
+    nix-index.enable = true;
+    nix-index-database.enable = true;
+    nom
   };
 }

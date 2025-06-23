@@ -41,8 +41,8 @@
         ci = "commit";
       };
       extraConfig = {
-        # init.defaultBranch = "master";
-        # pull.rebase = "false";
+        init.defaultBranch = "main";
+        pull.rebase = "true";
       };
     };
     lazygit.enable = true;

@@ -84,7 +84,6 @@ in
       "koekeishiya/formulae"
       "nikitabobko/tap"
       "pulumi/tap"
-
     ];
 
     brews = [
@@ -104,7 +103,7 @@ in
       # "datasette"                   # SQLite explorer
       "direnv"                      # Per-dir env vars
       # "dive"                        # Docker layer explorer
-      # "dotenvx/brew/dotenvx"
+      "dotenvx/brew/dotenvx"
       # "dprint"
       "dust"                        # Disk usage
       # "e2b"
@@ -115,7 +114,7 @@ in
       # "f2"
       "fd"                          # Better find
       "fastfetch"                   # System info
-      # "ffmpeg"
+      "ffmpeg"
       "flyctl"
       "fzf"
       "fx"                          # JSON viewer
@@ -128,7 +127,7 @@ in
       "git-delta"                   # Better git diffs
       # "git-lfs"
       # "gitleaks"                    # Secret scanner
-      # "glow"                        # Markdown viewer
+      "glow"                        # Markdown viewer
       "go"                          # Go language
       # "goaccess"                    # Web log analyser
       # "hexyl"

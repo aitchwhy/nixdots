@@ -44,20 +44,26 @@ in
       "root"
     ] ++ config.myusers;
 
-    nix.optimise.automatic = true;
+    # nix.optimise.automatic = true;
     nix.checkConfig = true;
-    nix.settings.sandbox = true;
-    nix.settings."experimental-features" = "nix-command flakes";
-    nix.settings."allow-dirty" = false;
-    nix.settings."download-buffer-size" = 32 * 1024 * 1024; # 32MiB
+
+    nix.settings = {
+      sandbox = true;
+      experimental-features = "nix-command flakes";
+      allow-dirty = true;
+      download-buffer-size = 256 * 1024 * 1024; # 256MiB
+      always-allow-substitutes = true;
+      auto-optimise-store = true;
+
+      max-jobs = "auto";
+      extra-nix-path = "nixpkgs=flake:nixpkgs";
+      extra-trusted-public-keys = [
+        "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="
+      ];
+    };
 
     # See https://github.com/LnL7/nix-darwin/issues/96
     ids.gids.nixbld = 350;
-
-    # Additional settings from Determinate Systems installer
-    nix.settings."always-allow-substitutes" = true;
-    nix.settings."max-jobs" = "auto";
-    nix.settings."extra-nix-path" = "nixpkgs=flake:nixpkgs";
 
     # FlakeHub cache
     nix.settings."extra-trusted-substituters" = [ "https://cache.flakehub.com" ];

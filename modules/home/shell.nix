@@ -69,9 +69,6 @@
 
     uv = {
       enable = true;
-      settings = {
-        packageManager = "nix";
-      };
     };
 
     direnv = {
@@ -83,9 +80,9 @@
     };
 
 
-    # fzf = {
-    #   enable = true;
-    # };
+    fzf = {
+      enable = true;
+    };
 
     # ripgrep = {
     #   enable = true;
