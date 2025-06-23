@@ -44,6 +44,8 @@ in
       "root"
     ] ++ config.myusers;
 
+    nix.optimise.automatic = true;
+
     # nix.optimise.automatic = true;
     nix.checkConfig = true;
 
@@ -53,13 +55,8 @@ in
       allow-dirty = true;
       download-buffer-size = 256 * 1024 * 1024; # 256MiB
       always-allow-substitutes = true;
-      auto-optimise-store = true;
 
       max-jobs = "auto";
-      extra-nix-path = "nixpkgs=flake:nixpkgs";
-      extra-trusted-public-keys = [
-        "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="
-      ];
     };
 
     # See https://github.com/LnL7/nix-darwin/issues/96

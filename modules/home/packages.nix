@@ -5,6 +5,7 @@
   # Search for packages here: https://search.nixos.org/packages
   home.packages = with pkgs; [
     omnix
+    yazi
 
     # Unix tools
     ripgrep # Better `grep`
@@ -23,18 +24,25 @@
 
     # Developer tools
     gh # GitHub CLI
+    nix-info
+    nixpacks
+    deadnix
+    yazi
+    yaziPlugins.nord
+    yaziPlugins.git
+    yaziPlugins.rsync
+    yaziPlugins.mactag
+    yaziPlugins.glow
+    comma
 
     # On ubuntu, we need this less for `man home-configuration.nix`'s pager to
     # work.
     less
 
-    nom
+    nix-output-monitor
 
     # Programming languages
     uv
-    python313
-    rustup
-    rust-analyzer
 
   ];
 
@@ -53,9 +61,23 @@
       enable = true;
       #host = ""; #In case you wish to use a server other than tmate.io
     };
-    nixd.enable = true;
-    nix-index.enable = true;
-    nix-index-database.enable = true;
-    nom
+
+    zellij = {
+      enable = true;
+      settings = {
+        theme = "tokyo-night";
+        default_shell = "zsh";
+        default_layout = "main";
+      };
+      enableZshIntegration = true;
+    };
+
+    yazi = {
+      enable = true;
+      settings = {
+        theme = "tokyo-night";
+      };
+    };
+
   };
 }

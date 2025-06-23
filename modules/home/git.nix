@@ -13,8 +13,9 @@
     gp = "git push";
     grep = "rg";
     gs = "git status";
-    lg = "lazygit";
     j = "just";
+    e = "$EDITOR";
+    lg = "lazygit";
     ll = "eza -lahF --git";
     ls = "eza --git --icons";
     nb = "nix build";
@@ -26,7 +27,6 @@
     ps = "procs";
     sp = "supabase";
     ts = "tailscale";
-    e = "$EDITOR";
     zj = "zellij";
   };
 

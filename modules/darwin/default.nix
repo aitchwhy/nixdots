@@ -22,8 +22,7 @@
         # wvous-tr-corner = 13; # top-right - Lock Screen
         wvous-bl-corner = 3; # bottom-left - Application Windows
         wvous-br-corner = 4; # bottom-right - Desktop
-        autohide = true;
-        orientation = "left";
+        orientation = "bottom";
         show-process-indicators = false;
         show-recents = false;
         static-only = true;

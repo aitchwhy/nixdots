@@ -17,10 +17,11 @@
       syntaxHighlighting.enable = true;
       envExtra = ''
         # Custom ~/.zshenv goes here
-
+        EDITOR=nvim
       '';
       profileExtra = ''
         # Custom ~/.zprofile goes here
+
       '';
       loginExtra = ''
         # Custom ~/.zlogin goes here
