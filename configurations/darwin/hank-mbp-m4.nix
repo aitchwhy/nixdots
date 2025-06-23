@@ -24,7 +24,52 @@ in
   home-manager.backupFileExtension = "nixos-unified-template-backup";
   services = {
     tailscale.enable = true;
-    kanata.enable = true;
+
+    kanata = {
+      enable = true;
+      keyboards = {
+        # Name your keyboard configuration
+        "default" = {
+          # Devices to use (empty means all keyboards)
+          devices = [ ];
+
+          # Kanata configuration
+          config = ''
+            ;; Define configuration options
+            (defcfg
+              ;; For macOS
+              process-unmapped-keys yes
+            )
+
+            ;; Define the source layer (your physical keyboard)
+            (defsrc
+              esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+              grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+              tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+              caps a    s    d    f    g    h    j    k    l    ;    '    ret
+              lsft z    x    c    v    b    n    m    ,    .    /    rsft
+              lctl lopt lcmd           spc            rcmd ropt rctl
+            )
+
+            ;; Define the base layer with capslock remapped
+            (deflayer base
+              _    _    _    _    _    _    _    _    _    _    _    _    _
+              _    _    _    _    _    _    _    _    _    _    _    _    _    _
+              _    _    _    _    _    _    _    _    _    _    _    _    _    _
+              @cap _    _    _    _    _    _    _    _    _    _    _    _
+              _    _    _    _    _    _    _    _    _    _    _    _
+              _    _    _              _              _    _    _
+            )
+
+            ;; Define the tap-hold behavior for capslock
+            (defalias
+              ;; caps lock → ESC on tap, left cmd+option+ctrl on hold
+              cap (tap-hold 200 esc (multi lctl lopt lcmd))
+            )
+          '';
+        };
+      };
+    };
   };
 
   homebrew = {
