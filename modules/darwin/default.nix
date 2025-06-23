@@ -13,6 +13,7 @@
   # TODO: https://mac.install.guide/mac-setup/
   # More hank-mbp-m4s => https://github.com/ryan4yin/nix-darwin-kickstarter/blob/main/rich-demo/modules/system.nix
   system = {
+    primaryUser = "hank";
     defaults = {
       dock = {
         # autohide = true;
@@ -21,6 +22,11 @@
         # wvous-tr-corner = 13; # top-right - Lock Screen
         wvous-bl-corner = 3; # bottom-left - Application Windows
         wvous-br-corner = 4; # bottom-right - Desktop
+        autohide = true;
+        orientation = "left";
+        show-process-indicators = false;
+        show-recents = false;
+        static-only = true;
       };
 
       finder = {
@@ -30,6 +36,7 @@
         QuitMenuItem = true; # enable quit menu item
         ShowPathbar = true; # show path bar
         ShowStatusBar = true; # show status bar
+        FXDefaultSearchScope = "SCcf";
       };
 
       # customize trackpad
@@ -41,7 +48,7 @@
 
       # customize settings that not supported by nix-darwin directly
       # Incomplete list of macOS `defaults` commands :
-      #   https://github.com/yannbertrand/macos-defaults
+      # https://github.com/yannbertrand/macos-defaults
       NSGlobalDomain = {
         # `defaults read NSGlobalDomain "xxx"`
         "com.apple.swipescrolldirection" = true;  # enable natural scrolling(default to true)
@@ -56,6 +63,10 @@
         InitialKeyRepeat = 15;  # normal minimum is 15 (225 ms), maximum is 120 (1800 ms)
         # sets how fast it repeats once it starts.
         KeyRepeat = 3;  # normal minimum is 2 (30 ms), maximum is 120 (1800 ms)
+
+        "com.apple.keyboard.fnState" = true;
+        NSAutomaticWindowAnimationsEnabled = false;
+        NSWindowShouldDragOnGesture = true;
       };
 
       # Customize settings that not supported by nix-darwin directly
@@ -84,7 +95,7 @@
           _FXSortFoldersFirst = true;
           # When performing a search, search the current folder by default
           FXDefaultSearchScope = "SCcf";
-          ShowPathbar = true;
+          # ShowPathbar = true;
         };
         "com.apple.desktopservices" = {
           # Avoid creating .DS_Store files on network or USB volumes
@@ -138,9 +149,6 @@
       #
       # disabled, caused only problems!
       # swapLeftCommandAndLeftAlt = false;
-    };
-
-    keyboard = {
       # enableKeyMapping = true;
       # remapCapsLockToControl = true;
     };

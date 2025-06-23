@@ -6,6 +6,13 @@
       packages = with pkgs; [
         just
         nixd
+        ripgrep
+        fd
+        bat
+        delta
+        yazi
+        zellij
+        zoxide
       ];
     };
   };
