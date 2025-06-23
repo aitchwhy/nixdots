@@ -1,6 +1,6 @@
 # See /modules/darwin/* for actual settings
 # This file is just *top-level* configuration.
-{ flake, lib, ... }:
+{ flake, lib, pkgs, ... }:
 
 let
   inherit (flake) inputs;
@@ -22,53 +22,53 @@ in
   # will complain "Existing file .. would be clobbered by backing up". To mitigate this,
   # we try to use as unique a backup file extension as possible.
   home-manager.backupFileExtension = "nixos-unified-template-backup";
-  services = {
+    services = {
     tailscale.enable = true;
+  };
 
-    kanata = {
-      enable = true;
-      keyboards = {
-        # Name your keyboard configuration
-        "default" = {
-          # Devices to use (empty means all keyboards)
-          devices = [ ];
+  # Create kanata configuration file
+  environment.etc."kanata/config.kbd".text = ''
+    ;; Define configuration options
+    (defcfg
+      ;; For macOS
+      process-unmapped-keys yes
+    )
 
-          # Kanata configuration
-          config = ''
-            ;; Define configuration options
-            (defcfg
-              ;; For macOS
-              process-unmapped-keys yes
-            )
+    ;; Define the source layer (your physical keyboard)
+    (defsrc
+      esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+      grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+      tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+      caps a    s    d    f    g    h    j    k    l    ;    '    ret
+      lsft z    x    c    v    b    n    m    ,    .    /    rsft
+      lctl lopt lcmd           spc            rcmd ropt rctl
+    )
 
-            ;; Define the source layer (your physical keyboard)
-            (defsrc
-              esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
-              grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-              tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-              caps a    s    d    f    g    h    j    k    l    ;    '    ret
-              lsft z    x    c    v    b    n    m    ,    .    /    rsft
-              lctl lopt lcmd           spc            rcmd ropt rctl
-            )
+    ;; Define the base layer with capslock remapped
+    (deflayer base
+      _    _    _    _    _    _    _    _    _    _    _    _    _
+      _    _    _    _    _    _    _    _    _    _    _    _    _    _
+      _    _    _    _    _    _    _    _    _    _    _    _    _    _
+      @cap _    _    _    _    _    _    _    _    _    _    _    _
+      _    _    _    _    _    _    _    _    _    _    _    _
+      _    _    _              _              _    _    _
+    )
 
-            ;; Define the base layer with capslock remapped
-            (deflayer base
-              _    _    _    _    _    _    _    _    _    _    _    _    _
-              _    _    _    _    _    _    _    _    _    _    _    _    _    _
-              _    _    _    _    _    _    _    _    _    _    _    _    _    _
-              @cap _    _    _    _    _    _    _    _    _    _    _    _
-              _    _    _    _    _    _    _    _    _    _    _    _
-              _    _    _              _              _    _    _
-            )
+    ;; Define the tap-hold behavior for capslock
+    (defalias
+      ;; caps lock → ESC on tap, left cmd+option+ctrl on hold
+      cap (tap-hold 200 esc (multi lctl lopt lcmd))
+    )
+  '';
 
-            ;; Define the tap-hold behavior for capslock
-            (defalias
-              ;; caps lock → ESC on tap, left cmd+option+ctrl on hold
-              cap (tap-hold 200 esc (multi lctl lopt lcmd))
-            )
-          '';
-        };
-      };
+  # Set up launchd agent for kanata
+  launchd.user.agents.kanata = {
+    command = "/opt/homebrew/bin/kanata -c /etc/kanata/config.kbd";
+    serviceConfig = {
+      KeepAlive = true;
+      RunAtLoad = true;
+      StandardOutPath = "/tmp/kanata.out.log";
+      StandardErrorPath = "/tmp/kanata.err.log";
     };
   };
 
