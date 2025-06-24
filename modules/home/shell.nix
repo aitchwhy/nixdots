@@ -140,24 +140,12 @@
       enableBashIntegration = true;
     };
 
-    # Container tools
-    podman = {
-      enable = true;
-      dockerCompat = true;
-    };
-
     # Database clients
     pgcli = {
       enable = true;
       config = {
         pager = "less";
       };
-    };
-
-    # Node.js version management
-    nvm = {
-      enable = true;
-      enableZshIntegration = true;
     };
 
     # Terraform
