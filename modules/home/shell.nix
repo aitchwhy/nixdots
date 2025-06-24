@@ -143,9 +143,6 @@
     # Database clients
     pgcli = {
       enable = true;
-      config = {
-        pager = "less";
-      };
     };
 
     # Terraform
