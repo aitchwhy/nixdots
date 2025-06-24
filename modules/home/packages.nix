@@ -76,6 +76,7 @@
     fx  # JSON viewer
     goaccess  # Web log analyser
     datasette  # SQLite explorer
+    yq  # YAML/JSON/XML processor
 
     # Cloud/Infrastructure
     awscli2
@@ -153,7 +154,6 @@
     # Better `cat`
     bat.enable = true;
     jq.enable = true;
-    yq.enable = true;
 
     # Install btop https://github.com/aristocratos/btop
     btop.enable = true;
