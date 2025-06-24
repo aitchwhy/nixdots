@@ -15,6 +15,7 @@
     coreutils
     gnumake
     git
+    just
 
     # macOS specific
     darwin.trash
