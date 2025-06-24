@@ -23,7 +23,7 @@
 
     # File management and search
     # yazi - moved to programs.yazi in shell.nix
-    yaziPlugins.nord
+    # yaziPlugins.nord  # Conflicts with git plugin
     yaziPlugins.git
     yaziPlugins.rsync
     yaziPlugins.mactag
