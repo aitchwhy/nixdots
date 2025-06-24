@@ -62,7 +62,7 @@
     httpie
     hurl  # HTTP testing
     xh  # Modern HTTP client
-    editorconfig
+    editorconfig-core-c  # EditorConfig core C implementation
     shellcheck
     shfmt
     semgrep  # Static analysis
