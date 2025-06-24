@@ -42,8 +42,11 @@
       };
       extraConfig = {
         init.defaultBranch = "main";
-        pull.rebase = "true";
+        pull.rebase = true;
+        push.autoSetupRemote = true;
       };
+      delta.enable = true;
+      lfs.enable = true;
     };
     lazygit.enable = true;
   };

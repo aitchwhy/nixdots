@@ -92,18 +92,6 @@
       enableBashIntegration = true;
     };
 
-    # Git tools
-    git = {
-      enable = true;
-      delta.enable = true;
-      lfs.enable = true;
-      extraConfig = {
-        init.defaultBranch = "main";
-        push.autoSetupRemote = true;
-        pull.rebase = true;
-      };
-    };
-
     # GitHub CLI
     gh = {
       enable = true;
