@@ -66,7 +66,7 @@
     shellcheck
     shfmt
     semgrep  # Static analysis
-    aider  # AI coding assistant
+    # aider  # AI coding assistant - not in nixpkgs
 
     # Text processing
     jo  # JSON generator
