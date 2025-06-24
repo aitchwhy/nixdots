@@ -80,12 +80,12 @@
     # Cloud/Infrastructure
     awscli2
     flyctl
-    # terraform - moved to programs.terraform in shell.nix
+    terraform
     pulumi
     skopeo
     sops
     trivy
-    # podman - moved to programs.podman in shell.nix
+    podman
     talosctl
 
     # Database clients

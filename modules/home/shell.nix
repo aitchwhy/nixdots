@@ -145,11 +145,6 @@
       enable = true;
     };
 
-    # Terraform
-    terraform = {
-      enable = true;
-    };
-
   };
 
   services = {
