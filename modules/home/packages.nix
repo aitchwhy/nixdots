@@ -88,7 +88,7 @@
     sops
     trivy
     podman
-    talosctl
+    # talosctl  # Verify package name
 
     # Database clients
     # pgcli - moved to programs.pgcli in shell.nix
@@ -128,10 +128,10 @@
     # spectral-cli  # OpenAPI linter - verify package name
     # kiota  # HTTP client generator - verify availability
     # openapi-tui  # OpenAPI TUI - verify package name
-    rich-cli  # Rich text CLI
+    # rich-cli  # Rich text CLI - verify package name
     # tag  # Verify package name
     luarocks
-    mas  # Mac App Store CLI
+    # mas  # Mac App Store CLI - verify on Darwin
 
     # AI/ML
     # e2b  # Verify availability in nixpkgs
