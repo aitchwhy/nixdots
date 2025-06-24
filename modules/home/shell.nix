@@ -88,7 +88,8 @@
     # Better ls replacement
     eza = {
       enable = true;
-      enableAliases = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
     };
 
     # Git tools
