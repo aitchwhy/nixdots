@@ -118,6 +118,9 @@
     # Documentation
     tlrc  # tldr client
 
+    # Log viewing
+    lnav  # Log file navigator
+
     # Other development tools
     taplo  # TOML formatter
     # spectral-cli  # OpenAPI linter - verify package name

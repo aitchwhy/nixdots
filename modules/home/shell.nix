@@ -124,11 +124,6 @@
       viAlias = true;
     };
 
-    # Log navigation
-    lnav = {
-      enable = true;
-    };
-
     # Modern replacements for Unix tools
     ripgrep = {
       enable = true;
