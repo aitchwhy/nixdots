@@ -23,11 +23,12 @@
 
     # File management and search
     # yazi - moved to programs.yazi in shell.nix
-    # yaziPlugins.nord  # Conflicts with git plugin
-    yaziPlugins.git
-    yaziPlugins.rsync
-    yaziPlugins.mactag
-    yaziPlugins.glow
+    # Yazi plugins temporarily disabled due to conflicts
+    # yaziPlugins.nord
+    # yaziPlugins.git
+    # yaziPlugins.rsync
+    # yaziPlugins.mactag
+    # yaziPlugins.glow
     # ripgrep - moved to programs.ripgrep in shell.nix
     # fd - moved to programs.fd in shell.nix
     sd
