@@ -136,7 +136,7 @@
     # e2b  # Verify availability in nixpkgs
 
     # Security tools
-    bitwarden-cli
+    # bitwarden-cli  # Currently marked as broken in nixpkgs
 
     # File sync
     # gdrive  # Not available in nixpkgs
