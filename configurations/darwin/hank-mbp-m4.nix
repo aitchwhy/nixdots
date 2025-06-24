@@ -87,123 +87,26 @@ in
     ];
 
     brews = [
-      # "aider"                       # AI coding assistant
-      "7zip"
-      "atuin"
-      "awscli"
-      "bat"                         # Better cat
-      "bitwarden-cli"
-      # "bruno-cli"                   # Git-friendly API client
-      "bun"                         # JS runtime
-      # "caddy"                       # HTTP server w/ HTTPS
-      # "coder"
-      # "commitizen"
-      "coreutils"
-      "curl"                        # HTTP client
-      # "datasette"                   # SQLite explorer
-      "direnv"                      # Per-dir env vars
-      # "dive"                        # Docker layer explorer
-      "dotenvx/brew/dotenvx"
-      # "dprint"
-      "dust"                        # Disk usage
-      # "e2b"
-      "editorconfig"
-      # "entr"                        # File watcher
-      # "eslint"
-      "eza"                         # Better ls
-      # "f2"
-      "fd"                          # Better find
-      "fastfetch"                   # System info
-      "ffmpeg"
-      "flyctl"
-      "fzf"
-      "fx"                          # JSON viewer
-      "gdrive"
-      "gh"                          # GitHub CLI
-      # "ghc"
-      "git"
-      "git-extras"                  # small git utils (git-ignore, git-standup, git-sync)
-      # "git-filter-repo"
-      "git-delta"                   # Better git diffs
-      # "git-lfs"
-      # "gitleaks"                    # Secret scanner
-      "glow"                        # Markdown viewer
-      "go"                          # Go language
-      # "goaccess"                    # Web log analyser
-      # "hexyl"
-      "htop"
-      # "httpie"
-      # "hurl"                        # HTTP testing
-      # "imagemagick"
-      # "jo"                          # JSON generator
-      "jq"
-      # "jtbl"                        # JSON → tables
-      # "just"                        # Command runner
-      "kanata"                      # Keyboard remapper
-      # "kiota"                       # HTTP client generator
-      "koekeishiya/formulae/skhd"   # Hotkey daemon
-      # "lazydocker"
-      # "lazygit"
-      # "lefthook"                    # Git hooks
-      # "lnav"
-      # "luarocks"
-      # "mas"                         # Mac App Store CLI
-      # "miller"                      # CSV swiss-army-knife
-      "neovim"
-      "nixpacks"
-      # "nvm"
-      # "nx"
-      # "openapi-tui"                 # OpenAPI TUI
-      # "ouch"
-      # "p7zip"
-      # "pandoc"
-      # "pgcli"
-      # "podman"
-      # "poppler"
-      "postgresql@17"
-      # "prettier"
-      # "prism-cli"                   # API mocking / contract
-      "procs"                       # Better ps
-      # "pulumi/tap/pulumi"
-      "ripgrep"
-      # "resvg"
-      # "rich"
-      "ruby"
-      "rustscan"
-      # "rustup-init"
-      "sd"                          # Better sed
-      "semgrep"                     # Static analysis
-      "shellcheck"
-      "shfmt"
-      # "siderolabs/tap/talosctl"
-      "skopeo"
-      "sops"
-      # "spectral-cli"                # OpenAPI linter
-      "speedtest-cli"
-      # "spider-cloud-cli"
-      "starship"                    # Prompt
-      # "supabase/tap/supabase"
-      # "tag"
-      # "taplo"
-      # "tectonic"
-      "terraform"
-      # "tesseract"
-      "tlrc"                        # tldr client
-      "tmux"
-      # "trivy"
-      # "trufflehog"
-      "uv"
-      # "vite"
-      "wget"
-      # "xh"                          # Modern HTTP client
-      "xo/xo/usql"
-      "yq"
-      # "yazi"
-      "zellij"
-      "zoxide"
-      "zsh-autosuggestions"
-      "zsh-completions"
-      "zsh-syntax-highlighting"
+      # macOS specific tools that need Homebrew
+      "kanata"                      # Keyboard remapper (macOS specific build)
+      "koekeishiya/formulae/skhd"   # Hotkey daemon (macOS specific)
+
+      # Packages from specific taps not in nixpkgs
+      "dotenvx/brew/dotenvx"        # From specific tap
+      "xo/xo/usql"                  # From specific tap
+      "supabase/tap/supabase"       # From specific tap
+      "spider-cloud-cli"            # Not in nixpkgs
+      "prism-cli"                   # API mocking / contract - not in nixpkgs
+      "gdrive"                      # Google Drive CLI - not in nixpkgs
+      "bruno-cli"                   # Git-friendly API client - not in nixpkgs
+      "f2"                          # Not in nixpkgs
+      "jtbl"                        # JSON → tables - not in nixpkgs
+      "resvg"                       # Not in nixpkgs
+      "tectonic"                    # Not in nixpkgs
+      "vite"                        # Not in nixpkgs
+      "nx"                          # Not in nixpkgs
+      "coder"                       # Not in nixpkgs
+      "trufflehog"                  # Not in nixpkgs
     ];
 
     casks =

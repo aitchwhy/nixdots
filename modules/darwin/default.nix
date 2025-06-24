@@ -1,5 +1,6 @@
 # This is your nix-darwin configuration.
 # For home configuration, see /modules/home/*
+{ pkgs, ... }:
 {
   imports = [
     ./common
@@ -7,6 +8,29 @@
 
   # Use TouchID for `sudo` authentication
   security.pam.services.sudo_local.touchIdAuth = true;
+
+  # System packages that should be available to all users
+  environment.systemPackages = with pkgs; [
+    # Essential system tools
+    coreutils
+    gnumake
+    git
+
+    # macOS specific
+    darwin.trash
+  ];
+
+  # PostgreSQL service configuration
+  services.postgresql = {
+    enable = true;
+    package = pkgs.postgresql_17;
+    dataDir = "/usr/local/var/postgres";
+    enableTCPIP = true;
+    authentication = ''
+      local all all trust
+      host all all 127.0.0.1/32 trust
+    '';
+  };
 
   # Configure macOS system
   # TODO: https://macos-defaults.com/mission-control/expose-group-apps.html
@@ -56,7 +80,7 @@
         AppleKeyboardUIMode = 3;  # Mode 3 enables full keyboard control.
         ApplePressAndHoldEnabled = false;  # disable press and hold
 
-        # If you press and hold certain keyboard keys when in a text area, the key’s character begins to repeat.
+        # If you press and hold certain keyboard keys when in a text area, the key's character begins to repeat.
         # This is very useful for vim users, they use `hjkl` to move cursor.
         # sets how long it takes before it starts repeating.
         InitialKeyRepeat = 15;  # normal minimum is 15 (225 ms), maximum is 120 (1800 ms)

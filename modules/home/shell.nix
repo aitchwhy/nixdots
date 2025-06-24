@@ -37,16 +37,6 @@
       enable = true;
     };
 
-    zellij = {
-      enable = true;
-      settings = {
-        theme = "catppuccin";
-        default_shell = "zsh";
-        default_layout = "main";
-
-      };
-    };
-
     # Better shell prompt!
     starship = {
       enable = true;
@@ -68,81 +58,117 @@
       };
     };
 
+    # Directory environment management
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+
+    # Shell history
+    atuin = {
+      enable = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+    };
+
+    # Fuzzy finder
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+    };
+
+    # Terminal file manager
+    yazi = {
+      enable = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+    };
+
+    # Better ls replacement
+    eza = {
+      enable = true;
+      enableAliases = true;
+    };
+
+    # Git tools
+    git = {
+      enable = true;
+      delta.enable = true;
+      lfs.enable = true;
+      extraConfig = {
+        init.defaultBranch = "main";
+        push.autoSetupRemote = true;
+        pull.rebase = true;
+      };
+    };
+
+    # GitHub CLI
+    gh = {
+      enable = true;
+      settings = {
+        git_protocol = "https";
+      };
+    };
+
+    # Python environment management
     uv = {
       enable = true;
     };
 
-    direnv = {
+    # Text editor
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      vimAlias = true;
+      viAlias = true;
+    };
+
+    # Log navigation
+    lnav = {
       enable = true;
     };
 
-    atuin = {
+    # Modern replacements for Unix tools
+    ripgrep = {
       enable = true;
     };
 
-
-    fzf = {
+    fd = {
       enable = true;
     };
 
-    # ripgrep = {
-    #   enable = true;
-    # };
+    # Shell completion
+    nix-index = {
+      enable = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+    };
 
-    # fd = {
-    #   enable = true;
-    # };
+    # Container tools
+    podman = {
+      enable = true;
+      dockerCompat = true;
+    };
 
-    # obsidian = {
-    #   enable = true;
-    # };
+    # Database clients
+    pgcli = {
+      enable = true;
+      config = {
+        pager = "less";
+      };
+    };
 
+    # Node.js version management
+    nvm = {
+      enable = true;
+      enableZshIntegration = true;
+    };
 
-    # neovim = {
-    #   enable = true;
-    # };
-
-    # lazygit = {
-    #   enable = true;
-    # };
-
-    # lazydocker = {
-    #   enable = true;
-    # };
-
-    # htop = {
-    #   enable = true;
-    # };
-
-    # fastfetch = {
-    #   enable = true;
-    # };
-
-    # git = {
-    #   enable = true;
-    # };
-
-    # bat = {
-    #   enable = true;
-    # };
-
-    # jq = {
-    #   enable = true;
-    # };
-
-    # aerospace = {
-    #   enable = true;
-    # };
-
-    # codex = {
-    #   enable = true;
-    # };
-
-    # gh = {
-    #   enable = true;
-    # };
-
-    # nix-index.enable = true;
+    # Terraform
+    terraform = {
+      enable = true;
+    };
 
   };
 
