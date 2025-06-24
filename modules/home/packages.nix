@@ -7,7 +7,6 @@
     omnix
     # Nix
     cachix
-    nom # nix build visualizer
     nil # Nix language server
     nix-info
     nixpkgs-fmt

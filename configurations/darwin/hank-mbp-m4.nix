@@ -124,6 +124,7 @@ in
         # "bruno"
         # "bunch"
         # "canva"
+        "slack"
         "carbon-copy-cloner"
         "cardhop"
         "chatgpt"
