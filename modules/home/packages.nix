@@ -54,7 +54,7 @@
 
     # Dev tools
     # gh - moved to programs.gh in shell.nix
-    comma
+    # comma
     less # On ubuntu, we need this less for `man home-configuration.nix`'s pager to work.
     dive  # Docker layer explorer
     entr  # File watcher
@@ -103,6 +103,12 @@
     nodejs
     nodePackages.prettier
     nodePackages.eslint
+    # Additional Node.js tools
+    nodePackages.npm # npm package manager
+    nodePackages.yarn # yarn package manager
+    nodePackages.pnpm # pnpm package manager
+    nodePackages.typescript # TypeScript compiler
+    nodePackages.typescript-language-server # TypeScript LSP
     dprint
 
     # Media
@@ -151,6 +157,8 @@
   # Programs natively supported by home-manager.
   # They can be configured in `programs.*` instead of using home.packages.
   programs = {
+    # Note: nix is not a valid programs option in home-manager
+
     # Better `cat`
     bat.enable = true;
     jq.enable = true;
