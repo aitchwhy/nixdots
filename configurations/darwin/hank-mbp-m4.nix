@@ -191,6 +191,8 @@ in
         # "repo-prompt"
         # "rize"
         # "royal-tsx"
+        "claude"
+        "claude-squad"
         "signal"
         "slack"
         "spotify"
