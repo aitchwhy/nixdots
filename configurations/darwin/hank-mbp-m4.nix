@@ -27,53 +27,11 @@ in
     tailscale.enable = true;
   };
 
-  # Create kanata configuration file
-  environment.etc."kanata/config.kbd".text = ''
-    ;; Define configuration options
-    (defcfg
-      ;; For macOS
-      process-unmapped-keys yes
-    )
 
-    ;; Define the source layer (your physical keyboard)
-    (defsrc
-      esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
-      grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-      tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-      caps a    s    d    f    g    h    j    k    l    ;    '    ret
-      lsft z    x    c    v    b    n    m    ,    .    /    rsft
-      lctl lopt lcmd           spc            rcmd ropt rctl
-    )
 
-    ;; Define the base layer with capslock remapped
-    (deflayer base
-      _    _    _    _    _    _    _    _    _    _    _    _    _
-      _    _    _    _    _    _    _    _    _    _    _    _    _    _
-      _    _    _    _    _    _    _    _    _    _    _    _    _    _
-      @cap _    _    _    _    _    _    _    _    _    _    _    _
-      _    _    _    _    _    _    _    _    _    _    _    _
-      _    _    _              _              _    _    _
-    )
 
-    ;; Define the tap-hold behavior for capslock
-    (defalias
-      ;; caps lock → ESC on tap, left cmd+option+ctrl on hold
-      cap (tap-hold 200 esc (multi lctl lopt lcmd))
-    )
-  '';
 
-  # Set up launchd agent for kanata
-  launchd.user.agents.kanata = {
-    command = "/opt/homebrew/bin/kanata -c /etc/kanata/config.kbd";
-    serviceConfig = {
-      KeepAlive = true;
-      RunAtLoad = true;
-      StandardOutPath = "/tmp/kanata.out.log";
-      StandardErrorPath = "/tmp/kanata.err.log";
-    };
-  };
-
-  homebrew = {
+  homebrew ={
     enable = true;
 
     onActivation.autoUpdate = true;
@@ -108,14 +66,16 @@ in
       "nx"                          # Not in nixpkgs
       "coder"                       # Not in nixpkgs
       "trufflehog"                  # Not in nixpkgs
+      "slack"
+      "claude-squad"
     ];
 
     casks =
       [
-        # "a-better-finder-rename"
-        # "airtable"
-        # "anki"
-        # "another-redis-desktop-manager"
+        "a-better-finder-rename"
+        "airtable"
+        "anki"
+        "another-redis-desktop-manager"
         # "asana"
         # "audacity"
         "bartender"
@@ -149,7 +109,7 @@ in
         "font-fira-mono-nerd-font"
         "font-symbols-only-nerd-font"
         # "ghidra"
-        "ghostty"
+        # "ghostty"
         "google-chrome"
         # "google-drive"
         "hammerspoon"
@@ -158,60 +118,58 @@ in
         # "iina"
         "imageoptim"
         "istat-menus"
-        # "jump"
+        "jump"
         "jump-desktop-connect"
         "kaleidoscope"
-        # "karabiner-elements"
+        "karabiner-elements"
         "keka"
         "kekaexternalhelper"
         "linear-linear"
         "lm-studio"
         # "maccy"
         "macwhisper"
-        # "mitmproxy"
-        # "ngrok"
+        "mitmproxy"
+        "ngrok"
         "nikitabobko/tap/aerospace"
-        # "nosql-workbench"
-        # "notion"
+        "nosql-workbench"
+        "notion"
         "obsidian"
         "ollama"
         "onlook"
         "orbstack"
         # "osquery"
-        # "pdf-expert"
+        "pdf-expert"
         "postman"
         # "prism"
         # "prisma-studio"
         "proxyman"
-        # "qlcolorcode"
+        "qlcolorcode"
         "qlmarkdown"
-        # "qlstephen"
+        "qlstephen"
         "quicklook-json"
         "raycast"
         # "repo-prompt"
-        # "rize"
-        # "royal-tsx"
-        "claude"
-        "claude-squad"
+        "rize"
+        "royal-tsx"
         "signal"
         "slack"
         "spotify"
         "superhuman"
-        # "superwhisper"
-        # "swish"
+        "superwhisper"
+        "swish"
         # "syncthing"
-        # "syntax-highlight"
-        # "tableplus"
+        "syntax-highlight"
+        "tableplus"
         "tailscale"
         # "timelane"
         # "tla+-toolbox"
         "todoist"
-        # "virtualbuddy"
+        "virtualbuddy"
         # "visual-studio-code"
         "warp"
         # "wireshark"
-        # "zed"
-        # "zen"
+        "zed"
+        "zen"
         "zoom"
       ];
 

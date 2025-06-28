@@ -1,5 +1,7 @@
 { ... }:
 {
+
+
   programs = {
     # on macOS, you probably don't need this
     bash = {
@@ -88,16 +90,6 @@
     # Better ls replacement
     eza = {
       enable = true;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-    };
-
-    # GitHub CLI
-    gh = {
-      enable = true;
-      settings = {
-        git_protocol = "https";
-      };
     };
 
     # Python environment management
@@ -125,8 +117,6 @@
     # Shell completion
     nix-index = {
       enable = true;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
     };
 
     # Database clients

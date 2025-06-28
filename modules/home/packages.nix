@@ -8,10 +8,12 @@
     # Nix
     cachix
     nil # Nix language server
+    nixd
     nix-info
     nixpkgs-fmt
     deadnix
     nix-output-monitor
+    nix-tree
 
     # Core utilities
     gnumake
@@ -29,15 +31,20 @@
     # yaziPlugins.mactag
     # yaziPlugins.glow
     # ripgrep - moved to programs.ripgrep in shell.nix
+    ripgrep
     # fd - moved to programs.fd in shell.nix
+    fd
     sd
-    # eza - moved to programs.eza in shell.nix
+    eza
     dust  # Disk usage
     ouch  # Compression/decompression
     hexyl  # Hex viewer
+    jq
+    bat
 
     # Archives
     p7zip
+
 
     # System monitoring
     procs  # Better ps
@@ -66,7 +73,6 @@
     shellcheck
     shfmt
     semgrep  # Static analysis
-    # aider  # AI coding assistant - not in nixpkgs
 
     # Text processing
     jo  # JSON generator
@@ -91,7 +97,7 @@
 
     # Database clients
     # pgcli - moved to programs.pgcli in shell.nix
-    # usql - From homebrew tap xo/xo/usql
+    usql # From homebrew tap xo/xo/usql
 
     # Languages and package managers
     # uv - moved to programs.uv in shell.nix
@@ -101,14 +107,14 @@
     ruby_3_3
     ghc
     nodejs
-    nodePackages.prettier
-    nodePackages.eslint
-    # Additional Node.js tools
-    nodePackages.npm # npm package manager
-    nodePackages.yarn # yarn package manager
-    nodePackages.pnpm # pnpm package manager
-    nodePackages.typescript # TypeScript compiler
-    nodePackages.typescript-language-server # TypeScript LSP
+    # nodePackages.prettier
+    # nodePackages.eslint
+    # # Additional Node.js tools
+    # nodePackages.npm # npm package manager
+    # nodePackages.yarn # yarn package manager
+    # nodePackages.pnpm # pnpm package manager
+    # nodePackages.typescript # TypeScript compiler
+    # nodePackages.typescript-language-server # TypeScript LSP
     dprint
 
     # Media
@@ -129,13 +135,12 @@
     lnav  # Log file navigator
 
     # Other development tools
-    taplo  # TOML formatter
+    # taplo  # TOML formatter
     # spectral-cli  # OpenAPI linter - verify package name
-    # kiota  # HTTP client generator - verify availability
     # openapi-tui  # OpenAPI TUI - verify package name
     # rich-cli  # Rich text CLI - verify package name
     # tag  # Verify package name
-    luarocks
+    # luarocks
     # mas  # Mac App Store CLI - verify on Darwin
 
     # AI/ML
@@ -164,7 +169,6 @@
     jq.enable = true;
 
     # Install btop https://github.com/aristocratos/btop
-    btop.enable = true;
     htop.enable = true;
 
     # Terminal multiplexers
@@ -180,7 +184,6 @@
       settings = {
         theme = "tokyo-night";
         default_shell = "zsh";
-        default_layout = "main";
       };
     };
 
@@ -192,7 +195,7 @@
 
     # Git UI tools
     lazygit.enable = true;
-    # lazydocker.enable = true; # Temporarily disabled - not available in nixpkgs
+    lazydocker.enable = true; # Temporarily disabled - not available in nixpkgs
 
     # System info
     fastfetch.enable = true;

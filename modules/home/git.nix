@@ -1,34 +1,5 @@
 { config, ... }:
 {
-  home.shellAliases = {
-    cat = "bat --paging=always";
-    cs = "claude squad";
-    d = "docker";
-    dc = "docker-compose";
-    diff = "delta";
-    find = "fd";
-    g = "git";
-    ga = "git add";
-    gc = "git commit";
-    gp = "git push";
-    grep = "rg";
-    gs = "git status";
-    j = "just";
-    e = "$EDITOR";
-    lg = "lazygit";
-    ll = "eza -lahF --git";
-    ls = "eza --git --icons";
-    nb = "nix build";
-    nd = "nix develop";
-    ndz = "nix develop --command zsh";
-    nf = "nix flake";
-    nr = "nix run";
-    pc = "process-compose";
-    ps = "procs";
-    sp = "supabase";
-    ts = "tailscale";
-    zj = "zellij";
-  };
 
   # https://nixos.asia/en/git
   programs = {
@@ -36,9 +7,29 @@
       enable = true;
       userName = config.me.fullname;
       userEmail = config.me.email;
-      ignores = [ "*~" "*.swp" ];
+      ignores = [
+        "*~"
+        "*.swp"
+        ".DS_Store"
+        "node_modules"
+        "dist"
+        "build"
+        "out"
+        "target"
+        "tmp"
+        ".env"
+        ".env.local"
+        ".DS_Store"
+      ];
       aliases = {
-        ci = "commit";
+        b = "branch";
+        c = "commit";
+        co = "checkout";
+        d = "diff";
+        l = "log";
+        ll = "pull";
+        p = "push";
+        s = "status";
       };
       extraConfig = {
         init.defaultBranch = "main";
@@ -48,7 +39,17 @@
       delta.enable = true;
       lfs.enable = true;
     };
-    lazygit.enable = true;
+
+    gh = {
+      enable = true;
+      settings.git_protocol = "ssh";
+    };
+
+    lazygit = {
+      enable = true;
+      settings.diff.context = 10;
+    };
+
   };
 
 }
