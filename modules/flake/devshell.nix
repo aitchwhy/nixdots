@@ -11,7 +11,6 @@
         bat
         delta
         yazi
-        zellij
         zoxide
       ];
     };

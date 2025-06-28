@@ -38,14 +38,16 @@ in
     ls = "eza --git --icons";
     nb = "nix build";
     nd = "nix develop";
-    ndz = "nix develop --command zsh";
+    nz = "nix develop --command zsh";
     nf = "nix flake";
+    np = "nix profile";
     nr = "nix run";
     pc = "process-compose";
     ps = "procs";
     sp = "supabase";
     ts = "tailscale";
     zj = "zellij";
+    claude = "/Users/hank/.claude/local/claude";
   };
 
 }

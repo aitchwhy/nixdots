@@ -12,7 +12,10 @@ in
   ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowBroken = true;
+  };
   networking.hostName = "hank-mbp-m4";
 
   system.primaryUser = "hank";
@@ -84,7 +87,6 @@ in
         # "bruno"
         # "bunch"
         # "canva"
-        "slack"
         "carbon-copy-cloner"
         "cardhop"
         "chatgpt"

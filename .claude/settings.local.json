@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(mkdir:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(just lint)",
+      "Bash(just check)",
+      "Bash(ls:*)",
+      "Bash(rm:*)"
+    ],
+    "deny": []
+  }
+}

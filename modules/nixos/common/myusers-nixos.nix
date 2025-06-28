@@ -18,3 +18,4 @@ in
     });
   };
 }
+EOF < /dev/null

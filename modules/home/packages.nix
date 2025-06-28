@@ -107,6 +107,7 @@
     ruby_3_3
     ghc
     nodejs
+    claude-code
     # nodePackages.prettier
     # nodePackages.eslint
     # # Additional Node.js tools
@@ -118,6 +119,8 @@
     dprint
 
     # Media
+    parsec-bin
+    slack
     ffmpeg
     imagemagick
     poppler
