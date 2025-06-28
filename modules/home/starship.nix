@@ -1,4 +1,4 @@
-{ ... }:
+_:
 {
 
   # Starship Terminal Prompt Configuration

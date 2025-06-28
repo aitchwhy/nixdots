@@ -1,4 +1,4 @@
-# NixOS-specific user configuration that extends the shared module
+# Darwin-specific user configuration that extends the shared module
 { flake, pkgs, lib, config, ... }:
 let
   inherit (flake.inputs) self;
@@ -11,10 +11,15 @@ in
   ];
 
   config = {
-    # NixOS-specific user configuration
+    # Darwin-specific user configuration
+    # For home-manager to work on Darwin
+    # https://github.com/nix-community/home-manager/issues/4026#issuecomment-1565487545
     users.users = mapListToAttrs config.myusers (name: {
-      isNormalUser = true;
-      home = "/home/${name}";
+      home = "/Users/${name}";
     });
+
+    # Darwin-specific Nix settings
+    # See https://github.com/LnL7/nix-darwin/issues/96
+    ids.gids.nixbld = 350;
   };
 }

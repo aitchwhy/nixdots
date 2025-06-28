@@ -4,6 +4,7 @@
 {
   imports = [
     ./common
+    ./homebrew
   ];
 
   # Use TouchID for `sudo` authentication
