@@ -27,7 +27,7 @@
     ruby_3_3
     ghc
     nodejs
-    
+
     # Language tools
     dprint # Multi-language formatter
 
@@ -38,5 +38,7 @@
     commitizen # Conventional commits
     lefthook # Git hooks
     semgrep # Static analysis
+
+    ls-lint # Linting files + dirs names
   ];
 }
