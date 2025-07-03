@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   networking.hostName = "hank-mbp-m4";
   system.stateVersion = 4;
@@ -45,22 +50,22 @@
 
     # customize trackpad
     trackpad = {
-      Clicking = true;  # enable tap to click
-      TrackpadRightClick = true;  # enable two finger right click
-      TrackpadThreeFingerDrag = true;  # enable three finger drag
+      Clicking = true; # enable tap to click
+      TrackpadRightClick = true; # enable two finger right click
+      TrackpadThreeFingerDrag = true; # enable three finger drag
     };
 
     # customize settings that not supported by nix-darwin directly
     NSGlobalDomain = {
-      "com.apple.swipescrolldirection" = true;  # enable natural scrolling
-      "com.apple.sound.beep.feedback" = 0;  # disable beep sound when pressing volume up/down key
-      AppleInterfaceStyle = "Dark";  # dark mode
-      AppleKeyboardUIMode = 3;  # Mode 3 enables full keyboard control.
-      ApplePressAndHoldEnabled = false;  # disable press and hold
+      "com.apple.swipescrolldirection" = true; # enable natural scrolling
+      "com.apple.sound.beep.feedback" = 0; # disable beep sound when pressing volume up/down key
+      AppleInterfaceStyle = "Dark"; # dark mode
+      AppleKeyboardUIMode = 3; # Mode 3 enables full keyboard control.
+      ApplePressAndHoldEnabled = false; # disable press and hold
 
       # Keyboard repeat settings
-      InitialKeyRepeat = 15;  # normal minimum is 15 (225 ms)
-      KeyRepeat = 3;  # normal minimum is 2 (30 ms)
+      InitialKeyRepeat = 15; # normal minimum is 15 (225 ms)
+      KeyRepeat = 3; # normal minimum is 2 (30 ms)
 
       "com.apple.keyboard.fnState" = true;
       NSAutomaticWindowAnimationsEnabled = false;
@@ -121,8 +126,8 @@
     };
 
     loginwindow = {
-      GuestEnabled = false;  # disable guest user
-      SHOWFULLNAME = true;  # show full name in login window
+      GuestEnabled = false; # disable guest user
+      SHOWFULLNAME = true; # show full name in login window
     };
   };
 
