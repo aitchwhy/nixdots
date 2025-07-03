@@ -1,5 +1,4 @@
+# Darwin common modules
 {
-  imports = [
-    ./myusers.nix
-  ];
+  # Add common darwin configurations here if needed
 }

@@ -20,4 +20,3 @@ backups/
 # direnv
 .direnv/
 .envrc.local
-.DS_Store

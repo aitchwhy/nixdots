@@ -21,7 +21,9 @@
       "Bash(git push:*)",
       "WebFetch(domain:github.com)",
       "Bash(just test:*)",
-      "Bash(./tests/test.sh:*)"
+      "Bash(./tests/test.sh:*)",
+      "Bash(fd:*)",
+      "Bash(git rm:*)"
     ],
     "deny": []
   }

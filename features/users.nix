@@ -22,9 +22,6 @@
     })
   ];
 
-  # Set primary user on Darwin
-  system.primaryUser = lib.mkIf pkgs.stdenv.isDarwin "hank";
-
   # Trust the user for Nix operations
   nix.settings.trusted-users = [ "hank" ];
 }
