@@ -21,6 +21,7 @@
     # File operations
     ouch # Compression/decompression
     p7zip # 7-zip archives
+    f2 # Batch file renaming
 
     # System monitoring
     dust # Disk usage analyzer

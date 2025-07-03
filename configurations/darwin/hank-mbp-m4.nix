@@ -1,6 +1,11 @@
 # See /modules/darwin/* for actual settings
 # This file is just *top-level* configuration.
-{ flake, lib, pkgs, ... }:
+{
+  flake,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   inherit (flake) inputs;
@@ -26,14 +31,9 @@ in
   # will complain "Existing file .. would be clobbered by backing up". To mitigate this,
   # we try to use as unique a backup file extension as possible.
   home-manager.backupFileExtension = "nixos-unified-template-backup";
-    services = {
+  services = {
     tailscale.enable = true;
   };
-
-
-
-
-
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 4;

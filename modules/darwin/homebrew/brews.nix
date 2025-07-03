@@ -15,14 +15,8 @@
     "prism-cli"                   # API mocking / contract testing
     "gdrive"                      # Google Drive CLI
     "bruno-cli"                   # Git-friendly API client
-    "f2"                          # Batch file renaming
-    "jtbl"                        # JSON to tables converter
-    "resvg"                       # SVG rendering
-    "tectonic"                    # Modern TeX engine
     "vite"                        # Frontend build tool
     "nx"                          # Monorepo build system
-    "coder"                       # Remote development
-    "trufflehog"                  # Secret scanning
     "slack"                       # Slack CLI
     "claude-squad"                # Claude development tool
   ];

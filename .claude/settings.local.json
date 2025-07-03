@@ -15,7 +15,9 @@
       "Bash(nix run:*)",
       "Bash(nix flake check:*)",
       "Bash(darwin-rebuild switch:*)",
-      "Bash(darwin-rebuild build:*)"
+      "Bash(darwin-rebuild build:*)",
+      "Bash(nix search:*)",
+      "Bash(chmod:*)"
     ],
     "deny": []
   }

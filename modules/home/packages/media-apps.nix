@@ -7,6 +7,8 @@
     imagemagick
     poppler # PDF utilities
     tesseract # OCR
+    resvg # SVG rendering
+    tectonic # Modern TeX engine
     
     # Applications
     slack

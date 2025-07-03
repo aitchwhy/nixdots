@@ -10,8 +10,8 @@
         ../features/shell.nix
         ../features/users.nix
 
-        # Darwin-specific features
-        ../features/homebrew.nix
+        # Darwin modules (includes homebrew)
+        ../modules/darwin
 
         # Host configuration
         ../hosts/${hostname}.nix

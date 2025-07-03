@@ -7,6 +7,7 @@
     yq # YAML/JSON/XML processor
     jo # JSON generator
     fx # Interactive JSON viewer
+    jtbl # JSON to tables converter
     
     # Data formats
     miller # CSV processing
