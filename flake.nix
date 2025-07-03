@@ -45,7 +45,7 @@
           hostname = "hank-mbp-m4";
           system = "aarch64-darwin";
           users = {
-            hank = import ./homes/hank.nix;
+            hank = import ./users/hank.nix;
           };
         };
       };

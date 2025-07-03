@@ -46,6 +46,8 @@ test_case "Darwin configuration build (dry-run)" "nix build .#darwinConfiguratio
 
 # Module tests
 test_case "Home-manager module" "nix eval .#homeModules.default"
+test_case "Machine config exists" "test -f machines/hank-mbp-m4.nix"
+test_case "User config exists" "test -f users/hank.nix"
 test_case "Development shell" "nix develop --command echo 'Shell OK'"
 
 # Justfile tests

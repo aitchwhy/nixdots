@@ -130,7 +130,7 @@ doctor:
     @echo -n "Darwin Rebuild: "
     darwin-rebuild --version || echo "Not found"
     @echo -n "Git status: "
-    git status --porcelain | wc -l | xargs -I {} sh -c 'if [ {} -eq 0 ]; then echo "{{green}}Clean{{reset}}"; else echo "{{yellow}}Dirty ({{}} files){{reset}}"; fi'
+    git status --porcelain | wc -l | xargs -I {} sh -c 'if [ {} -eq 0 ]; then echo "{{green}}Clean{{reset}}"; else echo "{{yellow}}Dirty ({} files){{reset}}"; fi'
     @echo ""
     nix doctor 2>/dev/null || nix store ping
 

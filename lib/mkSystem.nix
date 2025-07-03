@@ -14,7 +14,7 @@
         ../modules/darwin
 
         # Host configuration
-        ../hosts/${hostname}.nix
+        ../machines/${hostname}.nix
 
         # Home-manager integration
         inputs.home-manager.darwinModules.home-manager
@@ -40,7 +40,7 @@
         ../features/users.nix
 
         # Host configuration
-        ../hosts/${hostname}.nix
+        ../machines/${hostname}.nix
 
         # Home-manager integration
         inputs.home-manager.nixosModules.home-manager

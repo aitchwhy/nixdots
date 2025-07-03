@@ -5,6 +5,7 @@
   imports = [
     ./common
     ./homebrew
+    ../shared/defaults.nix
   ];
 
   # Use TouchID for `sudo` authentication
@@ -66,9 +67,9 @@
 
       # customize trackpad
       trackpad = {
-        Clicking = true;  # enable tap to click(轻触触摸板相当于点击)
-        TrackpadRightClick = true;  # enable two finger right click
-        TrackpadThreeFingerDrag = true;  # enable three finger drag
+        Clicking = true; # enable tap to click(轻触触摸板相当于点击)
+        TrackpadRightClick = true; # enable two finger right click
+        TrackpadThreeFingerDrag = true; # enable three finger drag
       };
 
       # customize settings that not supported by nix-darwin directly
@@ -76,18 +77,18 @@
       # https://github.com/yannbertrand/macos-defaults
       NSGlobalDomain = {
         # `defaults read NSGlobalDomain "xxx"`
-        "com.apple.swipescrolldirection" = true;  # enable natural scrolling(default to true)
-        "com.apple.sound.beep.feedback" = 0;  # disable beep sound when pressing volume up/down key
-        AppleInterfaceStyle = "Dark";  # dark mode
-        AppleKeyboardUIMode = 3;  # Mode 3 enables full keyboard control.
-        ApplePressAndHoldEnabled = false;  # disable press and hold
+        "com.apple.swipescrolldirection" = true; # enable natural scrolling(default to true)
+        "com.apple.sound.beep.feedback" = 0; # disable beep sound when pressing volume up/down key
+        AppleInterfaceStyle = "Dark"; # dark mode
+        AppleKeyboardUIMode = 3; # Mode 3 enables full keyboard control.
+        ApplePressAndHoldEnabled = false; # disable press and hold
 
         # If you press and hold certain keyboard keys when in a text area, the key's character begins to repeat.
         # This is very useful for vim users, they use `hjkl` to move cursor.
         # sets how long it takes before it starts repeating.
-        InitialKeyRepeat = 15;  # normal minimum is 15 (225 ms), maximum is 120 (1800 ms)
+        InitialKeyRepeat = 15; # normal minimum is 15 (225 ms), maximum is 120 (1800 ms)
         # sets how fast it repeats once it starts.
-        KeyRepeat = 3;  # normal minimum is 2 (30 ms), maximum is 120 (1800 ms)
+        KeyRepeat = 3; # normal minimum is 2 (30 ms), maximum is 120 (1800 ms)
 
         "com.apple.keyboard.fnState" = true;
         NSAutomaticWindowAnimationsEnabled = false;
@@ -109,7 +110,7 @@
           # Add a context menu item for showing the Web Inspector in web views
           WebKitDeveloperExtras = true;
           # set fn keys to default to f1~f12
-          com.apple.keyboard.fnState = false;
+          com.apple.keyboard.fnState = true;
         };
         "com.apple.finder" = {
           AppleShowAllFiles = true;
@@ -154,11 +155,10 @@
       };
 
       loginwindow = {
-        GuestEnabled = false;  # disable guest user
-        SHOWFULLNAME = true;  # show full name in login window
+        GuestEnabled = false; # disable guest user
+        SHOWFULLNAME = true; # show full name in login window
       };
     };
-
 
     # keyboard settings is not very useful on macOS
     # the most important thing is to remap option key to alt key globally,
