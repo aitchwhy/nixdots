@@ -23,6 +23,11 @@
       forAllSystems = nixpkgs.lib.genAttrs systems;
     in
     {
+      # Home modules
+      homeModules = {
+        default = ./modules/home;
+      };
+
       # Darwin configurations
       darwinConfigurations = {
         hank-mbp-m4 = lib.mkSystem.mkDarwin {

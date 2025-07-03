@@ -1,5 +1,5 @@
 # Media tools and applications
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   home.packages = with pkgs; [
     # Media processing
@@ -9,7 +9,8 @@
     tesseract # OCR
     
     # Applications
-    parsec-bin
     slack
+  ] ++ lib.optionals pkgs.stdenv.isLinux [
+    parsec-bin
   ];
 }

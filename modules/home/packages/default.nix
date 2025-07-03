@@ -4,7 +4,5 @@
     with builtins;
     map
       (fn: ./${fn})
-      (filter 
-        (fn: fn != "default.nix" && hasSuffix ".nix" fn) 
-        (attrNames (readDir ./.)));
+      (filter (fn: fn != "default.nix") (attrNames (readDir ./.)));
 }

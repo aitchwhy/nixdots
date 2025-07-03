@@ -12,7 +12,10 @@
       "Bash(mv:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(nix run:*)"
+      "Bash(nix run:*)",
+      "Bash(nix flake check:*)",
+      "Bash(darwin-rebuild switch:*)",
+      "Bash(darwin-rebuild build:*)"
     ],
     "deny": []
   }

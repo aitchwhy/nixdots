@@ -19,7 +19,7 @@ _:
       syntaxHighlighting.enable = true;
       envExtra = ''
         # Custom ~/.zshenv goes here
-        EDITOR=nvim
+        export EDITOR=nvim
       '';
       profileExtra = ''
         # Custom ~/.zprofile goes here
