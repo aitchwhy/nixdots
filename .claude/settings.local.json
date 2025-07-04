@@ -25,7 +25,8 @@
       "Bash(fd:*)",
       "Bash(git rm:*)",
       "Bash(touch:*)",
-      "Bash(just info)"
+      "Bash(just info)",
+      "Bash(tree:*)"
     ],
     "deny": []
   }

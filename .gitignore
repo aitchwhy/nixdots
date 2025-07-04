@@ -4,6 +4,7 @@ result-*
 
 # Backups
 backups/
+!backups/README.md
 
 # macOS
 .DS_Store
