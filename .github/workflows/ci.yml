@@ -9,51 +9,64 @@ on:
 
 jobs:
   check:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@main
+        uses: cachix/install-nix-action@v24
         with:
-          extra-conf: |
+          nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: |
             experimental-features = nix-command flakes
+            accept-flake-config = true
       
-      - name: Setup Nix cache
-        uses: DeterminateSystems/magic-nix-cache-action@main
-      
-      - name: Check Nix installation
-        run: |
-          nix --version
-          nix flake metadata
-      
-      - name: Format check
-        run: nix fmt -- --check
-      
-      - name: Flake check
+      - name: Check Nix flake
         run: nix flake check --no-build
       
-      - name: Evaluate Darwin configuration
+      - name: Check formatting
+        run: nix fmt -- --check
+      
+      - name: Show flake info
+        run: |
+          nix flake show
+          nix flake metadata
+      
+      - name: Validate flake outputs
         run: |
           nix eval .#darwinConfigurations.hank-mbp-m4.config.system.build.toplevel
       
-      - name: Build configuration (dry-run)
-        run: |
-          nix build .#darwinConfigurations.hank-mbp-m4.system --dry-run
-      
-      - name: Run tests
-        run: ./tests/test.sh
+      - name: Install just
+        uses: extractions/setup-just@v1
       
       - name: Check justfile
         run: |
-          nix run nixpkgs#just -- --evaluate
-          nix run nixpkgs#just -- --fmt --check
+          just --version
+          just --evaluate
+          just --fmt --check
 
-  build-matrix:
+  test:
+    runs-on: ubuntu-latest
+    needs: check
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install Nix
+        uses: cachix/install-nix-action@v24
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+      
+      - name: Dry build
+        run: nix build .#darwinConfigurations.hank-mbp-m4.system --dry-run
+      
+      - name: Test nix develop
+        run: nix develop --command echo "Development shell OK"
+
+  build-darwin:
     runs-on: macos-latest
-    strategy:
-      matrix:
-        host: [hank-mbp-m4]
+    needs: check
     steps:
       - uses: actions/checkout@v4
       
@@ -66,7 +79,11 @@ jobs:
       - name: Setup Nix cache
         uses: DeterminateSystems/magic-nix-cache-action@main
       
-      - name: Build ${{ matrix.host }}
+      - name: Build Darwin configuration
         run: |
-          nix build .#darwinConfigurations.${{ matrix.host }}.system --no-link
-          echo "✅ Successfully built configuration for ${{ matrix.host }}"
+          nix build .#darwinConfigurations.hank-mbp-m4.system --no-link --print-out-paths
+      
+      - name: Run tests
+        run: |
+          chmod +x tests/test.sh
+          ./tests/test.sh
