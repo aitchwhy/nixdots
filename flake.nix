@@ -17,12 +17,11 @@
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      nix-darwin,
-      home-manager,
-      ...
+    { self
+    , nixpkgs
+    , nix-darwin
+    , home-manager
+    , ...
     }@inputs:
     let
       lib = import ./lib { inherit inputs; };

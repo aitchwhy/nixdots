@@ -25,7 +25,7 @@
       enableZshIntegration = true;
       enableBashIntegration = true;
     };
-    
+
     yazi = {
       enableZshIntegration = true;
       enableBashIntegration = true;

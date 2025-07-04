@@ -9,7 +9,7 @@
     tesseract # OCR
     resvg # SVG rendering
     tectonic # Modern TeX engine
-    
+
     # Applications
     slack
   ] ++ lib.optionals pkgs.stdenv.isLinux [

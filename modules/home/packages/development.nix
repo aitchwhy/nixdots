@@ -40,10 +40,10 @@
     semgrep # Static analysis
 
     ls-lint # Linting files + dirs names
-    
+
     # Security and analysis
     trufflehog # Secret scanning
-    
+
     # Remote development
     coder # Remote development environments via Terraform
   ];
