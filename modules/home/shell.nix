@@ -19,7 +19,6 @@ _:
       syntaxHighlighting.enable = true;
       envExtra = ''
         # Custom ~/.zshenv goes here
-        export EDITOR=nvim
       '';
       profileExtra = ''
         # Custom ~/.zprofile goes here
@@ -64,6 +63,10 @@ _:
     direnv = {
       enable = true;
       nix-direnv.enable = true;
+      config.global = {
+        # Make direnv messages less verbose
+        hide_env_diff = true;
+      };
     };
 
     # Shell history
@@ -71,6 +74,11 @@ _:
       enable = true;
       enableZshIntegration = true;
       enableBashIntegration = true;
+      settings = {
+        auto_sync = true;
+        sync_frequency = "1440";
+        style = "tokyo-night";
+      };
     };
 
     # Fuzzy finder
@@ -85,6 +93,9 @@ _:
       enable = true;
       enableZshIntegration = true;
       enableBashIntegration = true;
+      settings = {
+        theme = "tokyo-night";
+      };
     };
 
     # Better ls replacement

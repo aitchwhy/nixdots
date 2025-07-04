@@ -32,13 +32,6 @@
       keep-derivations = lib.mkDefault false;
       auto-optimise-store = lib.mkDefault false; # Can be slow on macOS
     };
-    
-    # Garbage collection
-    gc = {
-      automatic = lib.mkDefault true;
-      dates = lib.mkDefault "weekly";
-      options = lib.mkDefault "--delete-older-than 30d";
-    };
   };
   
   # Shell aliases that don't conflict with features/shell.nix
@@ -52,9 +45,9 @@
   
   # Environment variables
   environment.variables = {
-    EDITOR = lib.mkDefault "vim";
-    VISUAL = lib.mkDefault "vim";
-    PAGER = lib.mkDefault "less";
-    LESS = lib.mkDefault "-R";
+    EDITOR = lib.mkForce "nvim";
+    VISUAL = lib.mkForce "nvim";
+    PAGER = lib.mkForce "less";
+    LESS = lib.mkForce "-R";
   };
 }

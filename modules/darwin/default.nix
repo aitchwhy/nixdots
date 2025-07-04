@@ -3,7 +3,6 @@
 { pkgs, ... }:
 {
   imports = [
-    ./common
     ./homebrew
     ../shared/defaults.nix
   ];

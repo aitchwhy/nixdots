@@ -39,11 +39,10 @@
       zsh
     ];
 
-    # Common environment variables
+    # Common environment variables (additional to those in shared/defaults.nix)
     variables = {
-      EDITOR = "nvim";
-      VISUAL = "nvim";
-      PAGER = "less";
+      # EDITOR and VISUAL are set in shared/defaults.nix
+      # PAGER is also set there
     };
   };
 

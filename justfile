@@ -66,7 +66,24 @@ dev:
 
 # Quick health check
 doctor:
+    @echo "System Health Check:"
+    @echo "==================="
     @which nix > /dev/null && echo "✓ Nix installed" || echo "✗ Nix not found"
     @which darwin-rebuild > /dev/null && echo "✓ Darwin-rebuild installed" || echo "✗ Darwin-rebuild not found"
     @test -f flake.nix && echo "✓ Flake found" || echo "✗ No flake.nix"
     @git status --porcelain | wc -l | xargs -I {} test {} -eq 0 && echo "✓ Git clean" || echo "! Git dirty"
+    @nix flake check --no-build > /dev/null 2>&1 && echo "✓ Flake valid" || echo "✗ Flake check failed"
+    @darwin-rebuild --list-generations 2>/dev/null | tail -n 1 | grep -q . && echo "✓ System generations accessible" || echo "! No system profile access"
+
+# Quick rebuild with validation
+rebuild: fmt check switch
+    @echo "✓ Configuration rebuilt successfully"
+
+# Preview changes before applying
+diff:
+    darwin-rebuild build --flake .#{{host}} && \
+    nix store diff-closures /run/current-system ./result
+
+# Rollback to previous generation
+rollback:
+    darwin-rebuild switch --rollback

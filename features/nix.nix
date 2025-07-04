@@ -38,6 +38,7 @@
     gc = {
       automatic = true;
       options = lib.mkDefault "--delete-older-than 14d";
+      interval = lib.mkIf pkgs.stdenv.isDarwin { Hour = 3; Minute = 0; Weekday = 7; }; # Weekly on Sunday at 3:00 AM
     };
   };
 
