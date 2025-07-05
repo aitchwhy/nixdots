@@ -30,7 +30,9 @@
       "Bash(just gc)",
       "Bash(./tests/lib/validate-structure.sh:*)",
       "Bash(nix-instantiate:*)",
-      "Bash(nix fmt:*)"
+      "Bash(nix fmt:*)",
+      "Bash(nix-collect-garbage:*)",
+      "Bash(sudo darwin-rebuild switch:*)"
     ],
     "deny": []
   }
