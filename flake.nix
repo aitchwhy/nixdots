@@ -24,7 +24,7 @@
     , ...
     }@inputs:
     let
-      lib = import ./lib { inherit inputs; };
+      mkSystem = import ./lib/mkSystem.nix { inherit inputs; };
       systems = [
         "aarch64-darwin"
         "x86_64-linux"
@@ -40,7 +40,7 @@
 
       # Darwin configurations
       darwinConfigurations = {
-        hank-mbp-m4 = lib.mkSystem.mkDarwin {
+        hank-mbp-m4 = mkSystem.mkDarwin {
           hostname = "hank-mbp-m4";
           system = "aarch64-darwin";
           users = {

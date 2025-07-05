@@ -11,21 +11,6 @@
 
   # Basic program defaults
   programs = {
-    # Git defaults
-    git = {
-      enable = lib.mkDefault true;
-      delta.enable = lib.mkDefault true;
-      extraConfig = {
-        init.defaultBranch = lib.mkDefault "main";
-        push.autoSetupRemote = lib.mkDefault true;
-        pull.rebase = lib.mkDefault true;
-        rerere.enabled = lib.mkDefault true;
-        fetch.prune = lib.mkDefault true;
-        diff.colorMoved = lib.mkDefault "zebra";
-        merge.conflictStyle = lib.mkDefault "zdiff3";
-      };
-    };
-
     # Shell enhancements
     direnv = {
       enable = lib.mkDefault true;

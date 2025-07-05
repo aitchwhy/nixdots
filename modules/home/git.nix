@@ -35,6 +35,10 @@
         init.defaultBranch = "main";
         pull.rebase = true;
         push.autoSetupRemote = true;
+        rerere.enabled = true;
+        fetch.prune = true;
+        diff.colorMoved = "zebra";
+        merge.conflictStyle = "zdiff3";
       };
       delta.enable = true;
       lfs.enable = true;

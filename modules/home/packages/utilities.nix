@@ -10,11 +10,7 @@
     less # Pager for man pages
 
     # File management and search
-    ripgrep # Fast grep (rg)
-    fd # Fast find
     sd # Find and replace
-    eza # Better ls
-    bat # Better cat with syntax highlighting
     hexyl # Hex viewer
     ls-lint
 

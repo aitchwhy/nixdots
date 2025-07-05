@@ -5,7 +5,6 @@
     # Cloud platforms
     awscli2
     flyctl
-    claude-code
 
     # Infrastructure as Code
     terraform

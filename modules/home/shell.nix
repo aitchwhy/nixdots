@@ -29,18 +29,12 @@ _:
       '';
       logoutExtra = ''
         # Custom ~/.zlogout goes here
-        alias pc="process-compose"
       '';
     };
 
-    # Type `z <pat>` to cd to some directory
-    zoxide = {
-      enable = true;
-    };
 
     # Better shell prompt!
     starship = {
-      enable = true;
       settings = {
         username = {
           style_user = "blue bold";
@@ -61,8 +55,6 @@ _:
 
     # Directory environment management
     direnv = {
-      enable = true;
-      nix-direnv.enable = true;
       config.global = {
         # Make direnv messages less verbose
         hide_env_diff = true;
@@ -81,12 +73,6 @@ _:
       };
     };
 
-    # Fuzzy finder
-    fzf = {
-      enable = true;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-    };
 
     # Terminal file manager
     yazi = {

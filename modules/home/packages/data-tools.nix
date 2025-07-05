@@ -3,7 +3,6 @@
 {
   home.packages = with pkgs; [
     # JSON/YAML/XML processing
-    jq # JSON processor
     yq # YAML/JSON/XML processor
     jo # JSON generator
     fx # Interactive JSON viewer

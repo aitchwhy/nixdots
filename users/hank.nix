@@ -19,18 +19,6 @@
     stateVersion = "24.11";
   };
 
-  # Shell integrations for some programs (modules don't set these)
-  programs = {
-    atuin = {
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-    };
-
-    yazi = {
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-    };
-  };
 
   # Platform-specific packages
   home.packages = with pkgs; lib.optionals pkgs.stdenv.isDarwin [

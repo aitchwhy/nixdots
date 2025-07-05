@@ -13,7 +13,6 @@
     nix-tree
 
     # Core development tools
-    gnumake
     editorconfig-core-c
 
     # Shell and scripting
@@ -33,13 +32,10 @@
 
     # Development utilities
     entr # File watcher
-    just # Command runner
     dive # Docker layer explorer
     commitizen # Conventional commits
     lefthook # Git hooks
     semgrep # Static analysis
-
-    ls-lint # Linting files + dirs names
 
     # Security and analysis
     trufflehog # Secret scanning
