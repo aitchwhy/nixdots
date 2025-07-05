@@ -1,5 +1,10 @@
 # Sensible defaults for all systems
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   # Time zone defaults
   time.timeZone = lib.mkDefault "America/New_York";
@@ -12,7 +17,10 @@
       cores = lib.mkDefault 0;
 
       # Enable flakes and nix-command by default
-      experimental-features = lib.mkDefault [ "nix-command" "flakes" ];
+      experimental-features = lib.mkDefault [
+        "nix-command"
+        "flakes"
+      ];
 
       # Garbage collection settings
       min-free = lib.mkDefault (1024 * 1024 * 1024); # 1GB
@@ -28,8 +36,8 @@
       require-sigs = lib.mkDefault true;
 
       # Build settings
-      keep-outputs = lib.mkDefault false;
-      keep-derivations = lib.mkDefault false;
+      keep-outputs = lib.mkDefault true;
+      keep-derivations = lib.mkDefault true;
       auto-optimise-store = lib.mkDefault false; # Can be slow on macOS
     };
   };
@@ -47,7 +55,7 @@
   environment.variables = {
     EDITOR = lib.mkForce "nvim";
     VISUAL = lib.mkForce "nvim";
-    PAGER = lib.mkForce "less";
+    PAGER = lib.mkForce "bat --paging=always";
     LESS = lib.mkForce "-R";
   };
 }

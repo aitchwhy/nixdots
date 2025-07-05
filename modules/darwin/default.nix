@@ -17,22 +17,24 @@
     gnumake
     git
     just
+    warp-terminal
+    ghostty
 
     # macOS specific
     darwin.trash
   ];
 
-  # PostgreSQL service configuration
-  services.postgresql = {
-    enable = true;
-    package = pkgs.postgresql_17;
-    dataDir = "/usr/local/var/postgres";
-    enableTCPIP = true;
-    authentication = ''
-      local all all trust
-      host all all 127.0.0.1/32 trust
-    '';
-  };
+  # # PostgreSQL service configuration
+  # services.postgresql = {
+  #   enable = true;
+  #   package = pkgs.postgresql_17;
+  #   dataDir = "/usr/local/var/postgres";
+  #   enableTCPIP = true;
+  #   authentication = ''
+  #     local all all trust
+  #     host all all 127.0.0.1/32 trust
+  #   '';
+  # };
 
   # Configure macOS system
   # TODO: https://macos-defaults.com/mission-control/expose-group-apps.html

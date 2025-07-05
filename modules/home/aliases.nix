@@ -24,6 +24,7 @@
     # Git shortcuts
     g = "git";
     ga = "git add";
+    gaa = "git add --all";
     gc = "git commit";
     gp = "git push";
     gs = "git status";

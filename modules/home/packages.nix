@@ -30,10 +30,10 @@
     };
 
     # Terminal sharing
-    tmate = {
-      enable = true;
-      # host = ""; # In case you wish to use a server other than tmate.io
-    };
+    # tmate = {
+    #   enable = true;
+    #   # host = ""; # In case you wish to use a server other than tmate.io
+    # };
 
     # Git UI tools
     lazygit.enable = true;

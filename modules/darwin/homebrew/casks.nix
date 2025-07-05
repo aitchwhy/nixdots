@@ -10,7 +10,7 @@
     "karabiner-elements" # Keyboard customization
     "nikitabobko/tap/aerospace" # Window management
     "raycast" # Productivity launcher
-    "swish" # Window gestures
+    # "swish" # Window gestures
 
     # Development tools
     "cursor" # AI-powered editor

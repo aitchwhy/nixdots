@@ -1,5 +1,10 @@
 # Sensible defaults for home-manager
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   # Home-manager settings
   programs.home-manager.enable = lib.mkDefault true;
@@ -31,6 +36,9 @@
       enable = lib.mkDefault true;
       enableZshIntegration = lib.mkDefault true;
       enableBashIntegration = lib.mkDefault true;
+      # settings = {
+
+      # }
     };
 
     fzf = {
