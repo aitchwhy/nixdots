@@ -29,7 +29,8 @@
       "Bash(tree:*)",
       "Bash(just gc)",
       "Bash(./tests/lib/validate-structure.sh:*)",
-      "Bash(nix-instantiate:*)"
+      "Bash(nix-instantiate:*)",
+      "Bash(nix fmt:*)"
     ],
     "deny": []
   }

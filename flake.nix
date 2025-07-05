@@ -24,7 +24,6 @@
     , ...
     }@inputs:
     let
-      mkSystem = import ./lib/mkSystem.nix { inherit inputs; };
       systems = [
         "aarch64-darwin"
         "x86_64-linux"
@@ -35,17 +34,55 @@
     {
       # Home modules
       homeModules = {
-        default = ./modules/home;
+        default = ./modules/home.nix;
       };
 
       # Darwin configurations
       darwinConfigurations = {
-        hank-mbp-m4 = mkSystem.mkDarwin {
-          hostname = "hank-mbp-m4";
+        hank-mbp-m4 = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          users = {
-            hank = import ./users/hank.nix;
-          };
+          specialArgs = { inherit inputs; };
+          modules = [
+            # Core modules
+            ./modules/nix.nix
+            ./modules/darwin.nix
+            ./modules/homebrew.nix
+            
+            # Machine configuration
+            ./machines/hank-mbp-m4.nix
+            
+            # Inline user definition
+            ({ pkgs, ... }: {
+              users.users.hank = {
+                description = "Hank Lee";
+                home = "/Users/hank";
+                shell = pkgs.zsh;
+              };
+              
+              # Enable zsh
+              programs.zsh.enable = true;
+              
+              # Shell packages
+              environment.systemPackages = with pkgs; [
+                ripgrep fd bat eza delta
+                direnv nix-direnv
+                wget curl tree jq yq-go
+              ];
+              
+              environment.shells = with pkgs; [ bashInteractive zsh ];
+            })
+            
+            # Home-manager integration
+            home-manager.darwinModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = { inherit inputs; self = inputs.self; };
+                users.hank = import ./users/hank.nix;
+              };
+            }
+          ];
         };
       };
 
