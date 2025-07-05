@@ -27,7 +27,9 @@
       "Bash(touch:*)",
       "Bash(just info)",
       "Bash(tree:*)",
-      "Bash(just gc)"
+      "Bash(just gc)",
+      "Bash(./tests/lib/validate-structure.sh:*)",
+      "Bash(nix-instantiate:*)"
     ],
     "deny": []
   }

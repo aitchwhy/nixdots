@@ -5,24 +5,35 @@ rec {
   # Standard auto-import function for .nix files
   autoImport = dir:
     with builtins;
-    map
-      (fn: dir + "/${fn}")
-      (filter
-        (fn: fn != "default.nix" && hasSuffix ".nix" fn)
-        (attrNames (readDir dir)));
-
-  # Auto-import with exclusion list
-  autoImportExclude = dir: excludes:
-    with builtins;
+    let
+      dirContents = readDir dir;
+    in
     map
       (fn: dir + "/${fn}")
       (filter
         (fn: 
           fn != "default.nix" && 
-          hasSuffix ".nix" fn &&
+          lib.hasSuffix ".nix" fn &&
+          dirContents.${fn} == "regular"
+        )
+        (attrNames dirContents));
+
+  # Auto-import with exclusion list
+  autoImportExclude = dir: excludes:
+    with builtins;
+    let
+      dirContents = readDir dir;
+    in
+    map
+      (fn: dir + "/${fn}")
+      (filter
+        (fn: 
+          fn != "default.nix" && 
+          lib.hasSuffix ".nix" fn &&
+          dirContents.${fn} == "regular" &&
           !(elem fn excludes)
         )
-        (attrNames (readDir dir)));
+        (attrNames dirContents));
 
   # Import all subdirectories that contain default.nix
   autoImportDirs = dir:
@@ -47,14 +58,14 @@ rec {
       (module:
         let
           moduleName = baseNameOf (toString module);
-          isDarwin = system == "darwin" || hasPrefix "darwin" system;
-          isLinux = system == "linux" || hasPrefix "linux" system;
+          isDarwin = system == "darwin" || lib.hasPrefix "darwin" system;
+          isLinux = system == "linux" || lib.hasPrefix "linux" system;
         in
           # Include module if it's not platform-specific
-          (!hasInfix "darwin" moduleName && !hasInfix "linux" moduleName && !hasInfix "nixos" moduleName) ||
+          (!lib.hasInfix "darwin" moduleName && !lib.hasInfix "linux" moduleName && !lib.hasInfix "nixos" moduleName) ||
           # Or if it matches the current platform
-          (isDarwin && hasInfix "darwin" moduleName) ||
-          (isLinux && (hasInfix "linux" moduleName || hasInfix "nixos" moduleName))
+          (isDarwin && lib.hasInfix "darwin" moduleName) ||
+          (isLinux && (lib.hasInfix "linux" moduleName || lib.hasInfix "nixos" moduleName))
       )
       modules;
 
