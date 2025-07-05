@@ -98,5 +98,6 @@
     # RSS and reading
     "folo" # RSS feed reader
     "rize" # Time tracking
+    "tailscale" # VPN/mesh network
   ];
 }

@@ -1,7 +1,10 @@
 { config, pkgs, lib, inputs, self, ... }:
 {
-  # Import all home modules
-  imports = [ self.homeModules.default ];
+  # Import all home modules and user packages
+  imports = [ 
+    self.homeModules.default
+    ./packages
+  ];
 
   # User identity configuration
   me = {

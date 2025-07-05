@@ -1,8 +1,8 @@
 # A module that automatically imports everything else in the parent folder.
+{ lib, ... }:
+let
+  importLib = import ../../lib/imports.nix { inherit lib; };
+in
 {
-  imports =
-    with builtins;
-    map
-      (fn: ./${fn})
-      (filter (fn: fn != "default.nix") (attrNames (readDir ./.)));
+  imports = importLib.autoImport ./.;
 }

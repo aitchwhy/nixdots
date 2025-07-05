@@ -39,6 +39,9 @@
         ../features/shell.nix
         ../features/users.nix
 
+        # NixOS modules
+        ../modules/nixos
+
         # Host configuration
         ../machines/${hostname}.nix
 
