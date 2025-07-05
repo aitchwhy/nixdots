@@ -3,7 +3,7 @@
   # Import all home modules and user packages
   imports = [ 
     self.homeModules.default
-    ./packages
+    ./hank/packages
   ];
 
   # User identity configuration

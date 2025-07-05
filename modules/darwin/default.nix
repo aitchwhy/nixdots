@@ -17,8 +17,9 @@
     gnumake
     git
     just
+    
+    # Terminal emulators
     warp-terminal
-    ghostty
 
     # macOS specific
     darwin.trash
