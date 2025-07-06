@@ -1,9 +1,6 @@
 # Core home-manager configuration
 { config, pkgs, lib, ... }:
 {
-  # Import neovim configuration
-  imports = [ ./home/neovim ];
-  
   # Home-manager settings
   programs.home-manager.enable = true;
 

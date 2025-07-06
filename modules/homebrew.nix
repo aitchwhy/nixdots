@@ -11,7 +11,7 @@
     taps = [
       "derailed/k9s"
       "helix-editor/helix"
-      "homebrew/services"
+      # "homebrew/services" # deprecated
       "jesseduffield/lazygit"
       "pulumi/tap"
       "supabase/tap"
@@ -37,7 +37,7 @@
       # Development
       "cursor"
       "dash"
-      "docker"
+      # "docker-desktop" # conflicts with existing installation
       "figma"
       "github"
       "gpg-suite"
@@ -58,7 +58,7 @@
       "zed"
       
       # Productivity
-      "camo"
+      # "camo" # not available, use camo-studio instead
       "cleanmymac"
       "craft"
       "fantastical"
@@ -72,13 +72,13 @@
       
       # Media
       "calibre"
-      "elpass"
+      # "elpass" # download server error
       "handbrake"
       "iina"
       "imageoptim"
       "itsycal"
       "keka"
-      "kindle"
+      # "kindle" # discontinued
       "loom"
       "pdf-expert"
       "plex"
@@ -106,7 +106,7 @@
       "tailscale"
       
       # Other
-      "perplexity"
+      # "perplexity" # not available as cask
     ];
     
     # Mac App Store apps

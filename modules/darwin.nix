@@ -1,9 +1,6 @@
 # macOS (Darwin) system configuration
 { pkgs, ... }:
 {
-  # Import shared defaults
-  imports = [ ./shared/defaults.nix ];
-
   # Use TouchID for sudo
   security.pam.services.sudo_local.touchIdAuth = true;
 

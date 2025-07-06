@@ -32,7 +32,8 @@
       "Bash(nix-instantiate:*)",
       "Bash(nix fmt:*)",
       "Bash(nix-collect-garbage:*)",
-      "Bash(sudo darwin-rebuild switch:*)"
+      "Bash(sudo darwin-rebuild switch:*)",
+      "Bash(brew list:*)"
     ],
     "deny": []
   }
