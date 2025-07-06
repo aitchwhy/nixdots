@@ -50,7 +50,6 @@
       settings = {
         auto_sync = true;
         sync_frequency = "1440";
-        style = "tokyo-night";
       };
     };
 
@@ -141,7 +140,7 @@
     fd.enable = true;
     bat.enable = true;
     jq.enable = true;
-    
+
     # Development tools
     neovim = {
       enable = true;
@@ -172,10 +171,10 @@
 
     # Shell completion
     nix-index.enable = true;
-    
+
     # Python environment management
     uv.enable = true;
-    
+
     # Database client
     pgcli.enable = true;
   };
@@ -200,7 +199,7 @@
     ts = "tailscale";
     zj = "zellij";
     claude = "/Users/hank/.claude/local/claude";
-    
+
     # Git shortcuts
     g = "git";
     ga = "git add";
@@ -208,7 +207,7 @@
     gc = "git commit";
     gp = "git push";
     gs = "git status";
-    
+
     # Nix shortcuts
     nb = "nix build";
     nd = "nix develop";
@@ -221,7 +220,7 @@
     nfu = "nix flake update";
     nfc = "nix flake check";
     nfmt = "nix fmt";
-    
+
     # Process compose
     pc = "process-compose";
   };
