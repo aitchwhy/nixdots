@@ -1,15 +1,23 @@
-{ config
-, pkgs
-, lib
-, ...
-}:
+# MacBook Pro M4 specific configuration
+# This file contains:
+# - Machine-specific network configuration
+# - Hardware-specific tools and optimizations
+# - Machine-specific services (e.g., Tailscale)
+{ config, pkgs, lib, ... }:
 {
   networking.hostName = "hank-mbp-m4";
+  networking.computerName = "Hank's MacBook Pro";
+  networking.localHostName = "hank-mbp-m4";
+
   system.stateVersion = 4;
 
-  # Tailscale
+  # Tailscale VPN
   services.tailscale.enable = true;
 
-  # Backup file extension for home-manager
-  home-manager.backupFileExtension = "nixos-unified-template-backup";
+  # Machine-specific network tools
+  environment.systemPackages = with pkgs; [
+    # Network diagnostics
+    mtr
+    iperf3
+  ];
 }

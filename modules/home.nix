@@ -1,242 +1,483 @@
-# Core home-manager configuration
+# Home Manager module - user environment configuration
+# This file contains:
+# - Common CLI tools and utilities for all users
+# - Shell configurations and integrations
+# - General productivity tools
+# - Does NOT include: language-specific tools, cloud CLIs, or user-specific preferences
 { config, pkgs, lib, ... }:
 {
   # Home-manager settings
   programs.home-manager.enable = true;
 
+  # Version - required by home-manager
+  home.stateVersion = "24.11";
+
+  # Core CLI tools for all users
+  home.packages = with pkgs; [
+    # Essential CLI tools
+    just
+    neovim
+    tmux
+
+    # Modern Unix replacements
+    ripgrep   # Better grep
+    fd        # Better find
+    bat       # Better cat
+    eza       # Better ls
+    delta     # Better diff
+    sd        # Better sed
+    dust      # Better du
+    procs     # Better ps
+    bottom    # Better top
+
+    # Data processing
+    jq        # JSON processor
+    yq        # YAML processor
+    fzf       # Fuzzy finder
+
+    # System monitoring
+    htop
+    btop
+    ncdu
+    tree
+
+    # Network tools
+    wget
+    curl
+
+    # File management
+    watchman  # File watcher
+
+    # Git enhancements
+    git-lfs
+    lazygit   # Git TUI
+    commitizen # Conventional commits
+
+    # Shell productivity
+    direnv
+    starship
+    zoxide
+    atuin
+  ];
+
   # Shell configuration
   programs = {
-    # Zsh
+    # Zsh - modern shell with great features
     zsh = {
       enable = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
+      enableCompletion = true;
+
+      initExtra = ''
+        # Fast directory navigation
+        setopt AUTO_CD
+        setopt AUTO_PUSHD
+        setopt PUSHD_IGNORE_DUPS
+        setopt PUSHD_SILENT
+
+        # Better history
+        setopt HIST_IGNORE_ALL_DUPS
+        setopt HIST_FIND_NO_DUPS
+        setopt HIST_SAVE_NO_DUPS
+        setopt SHARE_HISTORY
+
+        # Modern completions
+        setopt MENU_COMPLETE
+        setopt AUTO_LIST
+        setopt COMPLETE_IN_WORD
+      '';
+
+      history = {
+        size = 50000;
+        save = 50000;
+        ignoreDups = true;
+        ignoreSpace = true;
+        share = true;
+      };
     };
 
-    # Better shell prompt
+    # Minimal, fast prompt
     starship = {
       enable = true;
       settings = {
-        username = {
-          style_user = "blue bold";
-          style_root = "red bold";
-          format = "[$user]($style) ";
-          disabled = false;
-          show_always = true;
+        format = "$username$hostname$directory$git_branch$git_status$cmd_duration$line_break$character";
+
+        add_newline = false;
+
+        directory = {
+          truncation_length = 3;
+          truncate_to_repo = true;
+          style = "bold cyan";
         };
-        hostname = {
-          ssh_only = false;
-          format = "on [$hostname](bold red) ";
-          trim_at = ".local";
+
+        git_branch = {
+          symbol = " ";
+          style = "bold purple";
+        };
+
+        git_status = {
           disabled = false;
+          style = "bold red";
+        };
+
+        cmd_duration = {
+          min_time = 500;
+          format = " [$duration]($style)";
+          style = "bold yellow";
+        };
+
+        character = {
+          success_symbol = "[❯](bold green)";
+          error_symbol = "[❯](bold red)";
+          vimcmd_symbol = "[❮](bold green)";
         };
       };
     };
 
-    # Directory environment management
+    # Essential developer tools
     direnv = {
       enable = true;
       nix-direnv.enable = true;
-      config.global = {
-        hide_env_diff = true;
-      };
-    };
-
-    # Shell history
-    atuin = {
-      enable = true;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-      settings = {
-        auto_sync = true;
-        sync_frequency = "1440";
-      };
+      silent = true;
     };
 
     # Fuzzy finder
     fzf = {
       enable = true;
       enableZshIntegration = true;
-      enableBashIntegration = true;
       defaultOptions = [
         "--height 40%"
-        "--border"
+        "--border sharp"
+        "--layout reverse"
+        "--info inline"
         "--preview-window=:hidden"
-        "--preview 'bat --color=always {}'"
+        "--bind='ctrl-/:toggle-preview'"
       ];
     };
 
-    # Terminal file manager
+    # Modern file manager
     yazi = {
       enable = true;
       enableZshIntegration = true;
-      enableBashIntegration = true;
-      settings = {
-        theme = "tokyo-night";
-      };
     };
 
-    # Better cd
+    # Smart directory jumping
     zoxide = {
       enable = true;
       enableZshIntegration = true;
-      enableBashIntegration = true;
+      options = [ "--cmd cd" ];
     };
 
-    # Git configuration
+    # Git essentials
     git = {
       enable = true;
-      delta.enable = true;
-      lfs.enable = true;
-      ignores = [
-        "*~"
-        "*.swp"
-        ".DS_Store"
-        "node_modules"
-        "dist"
-        "build"
-        "out"
-        "target"
-        "tmp"
-        ".env"
-        ".env.local"
-      ];
-      aliases = {
-        b = "branch";
-        c = "commit";
-        co = "checkout";
-        d = "diff";
-        l = "log";
-        ll = "pull";
-        p = "push";
-        s = "status";
+      delta = {
+        enable = true;
+        options = {
+          navigate = true;
+          light = false;
+          line-numbers = true;
+          side-by-side = true;
+        };
       };
+
+      lfs.enable = true;
+
+      ignores = [
+        ".DS_Store"
+        "*.swp"
+        "*.swo"
+        "*~"
+        ".env.local"
+        ".direnv"
+        "node_modules"
+        "target"
+        "dist"
+        ".idea"
+        ".vscode"
+        "*.log"
+      ];
+
+      aliases = {
+        # Essential shortcuts only
+        co = "checkout";
+        br = "branch";
+        ci = "commit";
+        st = "status";
+        unstage = "reset HEAD --";
+        last = "log -1 HEAD";
+        l = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+      };
+
       extraConfig = {
         init.defaultBranch = "main";
         pull.rebase = true;
         push.autoSetupRemote = true;
-        rerere.enabled = true;
-        fetch.prune = true;
-        diff.colorMoved = "zebra";
         merge.conflictStyle = "zdiff3";
+        rerere.enabled = true;
+
+        branch.sort = "-committerdate";
+
+        # Performance
+        core = {
+          preloadindex = true;
+          fscache = true;
+          untrackedcache = true;
+        };
+
+        # Better diffs
+        diff = {
+          algorithm = "histogram";
+          colorMoved = "default";
+          colorMovedWS = "ignore-all-space";
+        };
+
+        # Credentials
+        credential.helper = "osxkeychain";
       };
     };
 
-    # GitHub CLI
-    gh = {
+    # Modern Unix replacements
+    eza = {
       enable = true;
-      settings.git_protocol = "ssh";
+      enableZshIntegration = true;
+      git = true;
+      icons = true;
+      extraOptions = [
+        "--group-directories-first"
+        "--header"
+      ];
     };
 
-    # Lazygit
-    lazygit = {
+    bat = {
       enable = true;
-      settings.diff.context = 10;
+      config = {
+        theme = "TwoDark";
+        pager = "less -FR";
+      };
     };
 
-    # Modern Unix tools
-    eza.enable = true;
-    ripgrep.enable = true;
-    fd.enable = true;
-    bat.enable = true;
-    jq.enable = true;
-
-    # Development tools
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-      vimAlias = true;
-      viAlias = true;
-    };
-
-    # Terminal multiplexers
+    # Terminal multiplexer
     tmux = {
       enable = true;
       baseIndex = 1;
       clock24 = true;
       escapeTime = 0;
-      historyLimit = 10000;
+      historyLimit = 50000;
       keyMode = "vi";
       mouse = true;
+      terminal = "screen-256color";
+
       prefix = "C-a";
-      terminal = "tmux-256color";
+
+      extraConfig = ''
+        # Better colors
+        set -ga terminal-overrides ",*256col*:Tc"
+
+        # Faster key repetition
+        set -sg repeat-time = 0
+
+        # Focus events
+        set -g focus-events on
+
+        # Status bar
+        set -g status-position top
+        set -g status-style 'bg=#1e1e2e fg=#cdd6f4'
+        set -g status-left-length 20
+
+        # Easy split panes
+        bind | split-window -h
+        bind - split-window -v
+      '';
     };
 
-    zellij = {
+    # Shell integration
+    nix-index = {
       enable = true;
-      settings = {
-        theme = "tokyo-night";
-      };
+      enableZshIntegration = true;
     };
-
-    # Shell completion
-    nix-index.enable = true;
-
-    # Python environment management
-    uv.enable = true;
-
-    # Database client
-    pgcli.enable = true;
   };
 
-  # Shell aliases
+  # Streamlined aliases
   home.shellAliases = {
-    # Basic shortcuts
-    cat = "bat --paging=never";
-    cs = "claude squad";
+    # Navigation
+    ".." = "cd ..";
+    "..." = "cd ../..";
+    "...." = "cd ../../..";
+    ll = "ls -l";
+    la = "ls -la";
+    lt = "ls -la --tree";
+
+    # Git
+    g = "git";
+    gs = "git status";
+    gp = "git push";
+    gl = "git pull";
+    gd = "git diff";
+    gc = "git commit";
+    gco = "git checkout";
+    gaa = "git add --all";
+
+    # Docker
     d = "docker";
-    dc = "docker-compose";
-    diff = "delta";
+    dc = "docker compose";
+    dps = "docker ps";
+
+    # Nix
+    rebuild = "darwin-rebuild switch --flake ~/.config/nix-darwin";
+    update = "nix flake update";
+    clean = "nix-collect-garbage -d";
+    search = "nix search nixpkgs";
+
+    # Quick edits
+    e = "$EDITOR";
+    se = "sudo $EDITOR";
+
+    # Productivity
+    cat = "bat";
     find = "fd";
     grep = "rg";
-    j = "just";
-    e = "$EDITOR";
-    lg = "lazygit";
-    ll = "eza -lahF --git";
-    ls = "eza --git --icons";
-    ps = "procs";
-    sp = "supabase";
-    ts = "tailscale";
-    zj = "zellij";
-    claude = "/Users/hank/.claude/local/claude";
-
-    # Git shortcuts
-    g = "git";
-    ga = "git add";
-    gaa = "git add --all";
-    gc = "git commit";
-    gp = "git push";
-    gs = "git status";
-
-    # Nix shortcuts
-    nb = "nix build";
-    nd = "nix develop";
-    nz = "nix develop --command zsh";
-    nf = "nix flake";
-    np = "nix profile";
-    nr = "nix run";
-    nrs = "darwin-rebuild switch --flake .";
-    nrb = "darwin-rebuild build --flake .";
-    nfu = "nix flake update";
-    nfc = "nix flake check";
-    nfmt = "nix fmt";
-
-    # Process compose
-    pc = "process-compose";
+    ls = "eza";
+    tree = "eza --tree";
   };
 
   # Environment variables
   home.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
-    PAGER = "less";
-    LESS = "-R";
+    PAGER = "less -FR";
+    MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+
+    # Development
+    HOMEBREW_NO_ANALYTICS = "1";
+    DOTNET_CLI_TELEMETRY_OPTOUT = "1";
+    GATSBY_TELEMETRY_DISABLED = "1";
+    NEXT_TELEMETRY_DISABLED = "1";
+
+    # Performance
+    DIRENV_LOG_FORMAT = "";
+
+    # Better defaults
+    LESS = "-FR";
+    SYSTEMD_LESS = "-FR";
   };
 
-  # Garbage collection
-  nix.gc = {
-    automatic = true;
-    frequency = "weekly";
-    options = "--delete-older-than 30d";
+  # Programs with configuration
+  programs = {
+    # ... existing code ...
+  };
+
+  # Shell configuration
+  programs.bash = {
+    enable = true;
+    enableCompletion = true;
+  };
+
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+  };
+
+  # Terminal multiplexer
+  programs.tmux = {
+    enable = true;
+    keyMode = "vi";
+    baseIndex = 1;
+    escapeTime = 0;
+    terminal = "screen-256color";
+  };
+
+  # Editor
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+  };
+
+  # Version control
+  programs.git = {
+    enable = true;
+    delta.enable = true;
+    lfs.enable = true;
+
+    extraConfig = {
+      init.defaultBranch = "main";
+      pull.rebase = true;
+      push.autoSetupRemote = true;
+      merge.conflictstyle = "diff3";
+      diff.colorMoved = "default";
+      rerere.enabled = true;
+    };
+  };
+
+  # Directory navigation
+  programs.zoxide = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+  };
+
+  # Better cat
+  programs.bat = {
+    enable = true;
+    config = {
+      theme = "TwoDark";
+      style = "numbers,changes,header";
+    };
+  };
+
+  # Better ls
+  programs.eza = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    git = true;
+    icons = true;
+  };
+
+  # Fuzzy finder
+  programs.fzf = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    defaultCommand = "fd --type f --hidden --follow --exclude .git";
+    defaultOptions = [
+      "--height 40%"
+      "--layout=reverse"
+      "--border"
+      "--inline-info"
+    ];
+  };
+
+  # Shell prompt
+  programs.starship = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+  };
+
+  # Directory environment
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
+
+  # Modern shell history
+  programs.atuin = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    settings = {
+      auto_sync = true;
+      sync_frequency = "5m";
+      search_mode = "fuzzy";
+      style = "compact";
+    };
   };
 }

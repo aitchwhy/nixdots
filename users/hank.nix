@@ -1,3 +1,9 @@
+# User-specific configuration
+# This file contains:
+# - Personal development tools and language toolchains
+# - Cloud platform CLIs and infrastructure tools
+# - User-specific Git configuration
+# - Personal productivity tools
 { config, pkgs, lib, inputs, self, ... }:
 {
   # Import home modules
@@ -6,10 +12,7 @@
   # User identity
   home = {
     username = "hank";
-    homeDirectory = lib.mkDefault (
-      if pkgs.stdenv.isDarwin then "/Users/hank"
-      else "/home/hank"
-    );
+    homeDirectory = "/Users/hank";
     stateVersion = "24.11";
   };
 
@@ -19,97 +22,124 @@
     userEmail = "hank.lee.qed@gmail.com";
   };
 
-  # User packages
+  # User-specific packages
   home.packages = with pkgs; [
-    # Cloud & Infrastructure
+    # Cloud Platforms
     awscli2
+    azure-cli
     flyctl
+    (google-cloud-sdk.withExtraComponents [
+      google-cloud-sdk.components.gke-gcloud-auth-plugin
+    ])
+
+    # Kubernetes & Infrastructure
+    kubectl
+    kubectx
+    kubernetes-helm
+    k9s
     terraform
+    terragrunt
     pulumi
-    skopeo
-    podman
-    trivy
-    sops
-    gitleaks
-    caddy
-    speedtest-cli
-    rustscan
-    
-    # Data Processing
-    yq
-    jo
-    fx
-    jtbl
-    miller
-    pandoc
-    httpie
-    hurl
-    xh
+
+    # Container Tools
+    docker-client
+    docker-compose
+    dive
+
+    # Programming Languages & Tools
+    # Node.js - using latest LTS
+    nodejs_22
+    nodePackages.pnpm
+    yarn-berry
+    bun
+
+    # Python - using uv for fast package management
+    python312
+    uv
+    ruff
+    poetry
+
+    # Go
+    go_1_22
+    gopls
+    golangci-lint
+
+    # Rust - via rustup for toolchain management
+    rustup
+
+    # Database Clients
+    postgresql_16
+    mysql84
+    mongosh
+    redis
     usql
-    datasette
+
+    # API Development
+    httpie
+    insomnia
+    grpcurl
+
+    # Documentation
     glow
-    goaccess
-    
-    # Development Tools
-    cachix
-    nil
-    nixd
-    nix-info
-    nixpkgs-fmt
-    deadnix
-    nix-output-monitor
-    nix-tree
-    editorconfig-core-c
+    pandoc
+
+    # Media Processing
+    ffmpeg-full
+    imagemagick
+
+    # Security Tools
+    sops
+    age
+    gnupg
+    _1password-cli
+
+    # Code Quality & Formatting
+    # Shell
     shellcheck
     shfmt
-    go
-    bun
-    rustup
-    ruby_3_3
-    ghc
-    nodejs
+
+    # Nix
+    nixpkgs-fmt
+    alejandra
+    deadnix
+    statix
+
+    # Multi-language
     dprint
-    entr
-    dive
-    commitizen
-    lefthook
-    semgrep
-    trufflehog
-    coder
-    
-    # Media & Documents
-    ffmpeg
-    imagemagick
-    poppler
-    tesseract
-    resvg
-    tectonic
-    slack
-    
-    # System Utilities
-    coreutils
-    curl
-    wget
-    tree
-    less
-    sd
-    hexyl
-    ls-lint
-    ouch
-    p7zip
-    f2
-    dust
-    procs
-    lnav
-    tlrc
-    git-extras
-    git-filter-repo
-    omnix
-  ] ++ lib.optionals pkgs.stdenv.isDarwin [
-    # macOS-specific
-    claude-code
-  ] ++ lib.optionals pkgs.stdenv.isLinux [
-    # Linux-specific
-    parsec-bin
+    treefmt
+
+    # Development Tools
+    # Nix-specific
+    cachix
+    devenv
+    nixd
+    nil
+    nix-tree
+    nix-output-monitor
+    nix-diff
+
+    # Additional CLI Tools
+    mkcert     # Local HTTPS certs
+    ngrok      # Expose local servers
+    caddy      # Modern web server
+
+    # GitHub
+    gh
+    act        # Run GitHub Actions locally
+  ];
+
+  # Language-specific configurations
+  home.sessionVariables = {
+    GOPATH = "$HOME/go";
+    CARGO_HOME = "$HOME/.cargo";
+    RUSTUP_HOME = "$HOME/.rustup";
+    PNPM_HOME = "$HOME/.pnpm";
+  };
+
+  home.sessionPath = [
+    "$GOPATH/bin"
+    "$CARGO_HOME/bin"
+    "$PNPM_HOME"
+    "$HOME/.local/bin"
   ];
 }
