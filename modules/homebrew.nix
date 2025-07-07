@@ -53,8 +53,8 @@
     # Mac App Store apps
     masApps = {
       "Xcode" = 497799835;
-      "Amphetamine" = 937984704;  # Keep Mac awake
-      "Pockity" = 1550027149;     # Stripe dashboard
+      "Amphetamine" = 937984704; # Keep Mac awake
+      "Pockity" = 1550027149; # Stripe dashboard
     };
   };
 }

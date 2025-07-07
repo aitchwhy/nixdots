@@ -42,10 +42,10 @@
         enable-spring-load-actions-on-all-items = true;
 
         # Hot corners
-        wvous-tl-corner = 2;  # top-left - Mission Control
+        wvous-tl-corner = 2; # top-left - Mission Control
         wvous-tr-corner = 12; # top-right - Notification Center
-        wvous-bl-corner = 3;  # bottom-left - Application Windows
-        wvous-br-corner = 4;  # bottom-right - Desktop
+        wvous-bl-corner = 3; # bottom-left - Application Windows
+        wvous-br-corner = 4; # bottom-right - Desktop
       };
 
       # Finder

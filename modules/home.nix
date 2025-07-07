@@ -16,24 +16,24 @@
   home.packages = with pkgs; [
     # Essential CLI tools
     just
-    neovim
-    tmux
+    # neovim is configured as a program below
+    # tmux is configured as a program below
 
     # Modern Unix replacements
-    ripgrep   # Better grep
-    fd        # Better find
-    bat       # Better cat
-    eza       # Better ls
-    delta     # Better diff
-    sd        # Better sed
-    dust      # Better du
-    procs     # Better ps
-    bottom    # Better top
+    ripgrep # Better grep
+    fd # Better find
+    # bat is configured as a program below
+    # eza is configured as a program below
+    delta # Better diff
+    sd # Better sed
+    dust # Better du
+    procs # Better ps
+    bottom # Better top
 
     # Data processing
-    jq        # JSON processor
-    yq        # YAML processor
-    fzf       # Fuzzy finder
+    jq # JSON processor
+    yq # YAML processor
+    # fzf is configured as a program below
 
     # System monitoring
     htop
@@ -46,18 +46,12 @@
     curl
 
     # File management
-    watchman  # File watcher
+    watchman # File watcher
 
     # Git enhancements
-    git-lfs
-    lazygit   # Git TUI
+    # git-lfs is configured via git program below
+    lazygit # Git TUI
     commitizen # Conventional commits
-
-    # Shell productivity
-    direnv
-    starship
-    zoxide
-    atuin
   ];
 
   # Shell configuration
@@ -297,6 +291,33 @@
       enable = true;
       enableZshIntegration = true;
     };
+
+    # Bash configuration
+    bash = {
+      enable = true;
+      enableCompletion = true;
+    };
+
+    # Editor
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
+    };
+
+    # Modern shell history
+    atuin = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      settings = {
+        auto_sync = true;
+        sync_frequency = "5m";
+        search_mode = "fuzzy";
+        style = "compact";
+      };
+    };
   };
 
   # Streamlined aliases
@@ -361,123 +382,5 @@
     # Better defaults
     LESS = "-FR";
     SYSTEMD_LESS = "-FR";
-  };
-
-  # Programs with configuration
-  programs = {
-    # ... existing code ...
-  };
-
-  # Shell configuration
-  programs.bash = {
-    enable = true;
-    enableCompletion = true;
-  };
-
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-  };
-
-  # Terminal multiplexer
-  programs.tmux = {
-    enable = true;
-    keyMode = "vi";
-    baseIndex = 1;
-    escapeTime = 0;
-    terminal = "screen-256color";
-  };
-
-  # Editor
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-  };
-
-  # Version control
-  programs.git = {
-    enable = true;
-    delta.enable = true;
-    lfs.enable = true;
-
-    extraConfig = {
-      init.defaultBranch = "main";
-      pull.rebase = true;
-      push.autoSetupRemote = true;
-      merge.conflictstyle = "diff3";
-      diff.colorMoved = "default";
-      rerere.enabled = true;
-    };
-  };
-
-  # Directory navigation
-  programs.zoxide = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-  };
-
-  # Better cat
-  programs.bat = {
-    enable = true;
-    config = {
-      theme = "TwoDark";
-      style = "numbers,changes,header";
-    };
-  };
-
-  # Better ls
-  programs.eza = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-    git = true;
-    icons = true;
-  };
-
-  # Fuzzy finder
-  programs.fzf = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-    defaultCommand = "fd --type f --hidden --follow --exclude .git";
-    defaultOptions = [
-      "--height 40%"
-      "--layout=reverse"
-      "--border"
-      "--inline-info"
-    ];
-  };
-
-  # Shell prompt
-  programs.starship = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-  };
-
-  # Directory environment
-  programs.direnv = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-    nix-direnv.enable = true;
-  };
-
-  # Modern shell history
-  programs.atuin = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-    settings = {
-      auto_sync = true;
-      sync_frequency = "5m";
-      search_mode = "fuzzy";
-      style = "compact";
-    };
   };
 }

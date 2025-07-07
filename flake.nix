@@ -89,6 +89,15 @@
             nix flake update
             echo "✅ Update complete! Run 'rebuild' to apply changes."
           '';
+          fmt = pkgs.writeShellScriptBin "fmt" ''
+            set -e
+            echo "🎨 Formatting Nix files..."
+            ${pkgs.fd}/bin/fd -e nix -E flake.lock . | while read -r file; do
+              echo "  Formatting: $file"
+              ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt "$file"
+            done
+            echo "✅ Formatting complete!"
+          '';
         in
         {
           rebuild = {
@@ -98,6 +107,10 @@
           update = {
             type = "app";
             program = "${update}/bin/update";
+          };
+          fmt = {
+            type = "app";
+            program = "${fmt}/bin/fmt";
           };
         }
       );
@@ -119,6 +132,7 @@
               # Utilities
               just
               git
+              fd
             ];
 
             shellHook = ''
@@ -127,8 +141,8 @@
               echo "📝 Available commands:"
               echo "  nix run .#rebuild    - Rebuild system configuration"
               echo "  nix run .#update     - Update flake inputs"
+              echo "  nix run .#fmt        - Format all Nix files"
               echo "  nix flake check      - Run all checks"
-              echo "  nixpkgs-fmt .        - Format Nix files"
               echo "  deadnix              - Find dead code"
               echo "  statix check         - Lint Nix files"
               echo ""
@@ -144,13 +158,33 @@
           pkgs = pkgsFor system;
         in
         {
-          format = pkgs.runCommand "check-format" { } ''
-            ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt --check ${./.}
+          format = pkgs.runCommand "check-format"
+            {
+              buildInputs = [ pkgs.fd pkgs.nixpkgs-fmt ];
+            } ''
+            cd ${./.}
+            echo "Checking Nix file formatting..."
+            ${pkgs.fd}/bin/fd -e nix -E flake.lock . -x ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt --check {} \;
             touch $out
           '';
         });
 
-      # Formatter
-      formatter = forAllSystems (system: (pkgsFor system).nixpkgs-fmt);
+      # Formatter - wrapper that only formats .nix files
+      formatter = forAllSystems (system:
+        let
+          pkgs = pkgsFor system;
+        in
+        pkgs.writeShellScriptBin "nix-fmt" ''
+          echo "🎨 Formatting Nix files..."
+          if [ $# -eq 0 ]; then
+            # No arguments, format all .nix files in current directory
+            ${pkgs.fd}/bin/fd -e nix -E flake.lock . -x ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt {} \;
+            echo "✅ Formatted all .nix files"
+          else
+            # Format specified files
+            ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt "$@"
+          fi
+        ''
+      );
     };
 }

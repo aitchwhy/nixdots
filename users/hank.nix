@@ -119,13 +119,13 @@
     nix-diff
 
     # Additional CLI Tools
-    mkcert     # Local HTTPS certs
-    ngrok      # Expose local servers
-    caddy      # Modern web server
+    mkcert # Local HTTPS certs
+    ngrok # Expose local servers
+    caddy # Modern web server
 
     # GitHub
     gh
-    act        # Run GitHub Actions locally
+    act # Run GitHub Actions locally
   ];
 
   # Language-specific configurations
