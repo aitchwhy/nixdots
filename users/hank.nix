@@ -17,7 +17,7 @@
   };
 
   # Git configuration
-  programs.git = {
+  modules.home.tools.git = {
     userName = "Hank Lee";
     userEmail = "hank.lee.qed@gmail.com";
   };

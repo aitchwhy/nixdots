@@ -41,9 +41,9 @@
           specialArgs = { inherit inputs; };
           modules = [
             # Core modules
-            ./modules/nix.nix
-            ./modules/darwin.nix
-            ./modules/homebrew.nix
+            ./modules/core/nix.nix
+            ./modules/darwin
+            ./modules/services/homebrew.nix
 
             # Machine configuration
             ./machines/hank-mbp-m4.nix
@@ -58,6 +58,9 @@
 
               programs.zsh.enable = true;
               environment.shells = with pkgs; [ bashInteractive zsh ];
+
+              # Set primary user for darwin modules
+              modules.darwin.system.primaryUser = "hank";
             })
 
             # Home-manager integration

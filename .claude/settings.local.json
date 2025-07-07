@@ -33,7 +33,9 @@
       "Bash(nix fmt:*)",
       "Bash(nix-collect-garbage:*)",
       "Bash(sudo darwin-rebuild switch:*)",
-      "Bash(brew list:*)"
+      "Bash(brew list:*)",
+      "Bash(just fmt:*)",
+      "Bash(./scripts/health-check.sh:*)"
     ],
     "deny": []
   }
