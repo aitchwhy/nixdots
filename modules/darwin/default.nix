@@ -13,6 +13,7 @@ with lib;
     ./system/defaults.nix
     ./system/keyboard.nix
     ./system/trackpad.nix
+    ./system/nix-optimizations.nix
 
     # Application settings
     ./apps/safari.nix
@@ -27,6 +28,7 @@ with lib;
       dock.enable = mkDefault true;
       finder.enable = mkDefault true;
       system.enable = mkDefault true;
+      system.nix-optimizations.enable = mkDefault true;
       keyboard.enable = mkDefault true;
       trackpad.enable = mkDefault true;
       safari.enable = mkDefault true;

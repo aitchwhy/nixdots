@@ -1,6 +1,44 @@
 {
   description = "Hank's Nix Configuration";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://cache.nixos.org"
+      "https://nix-community.cachix.org"
+      "https://devenv.cachix.org"
+      "https://nixpkgs-unfree.cachix.org"
+      "https://numtide.cachix.org"
+      "file:///var/cache/nix-binary-cache"
+    ];
+    extra-trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+      "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
+      "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
+    ];
+
+    # Performance optimizations
+    max-jobs = "auto";
+    cores = 0;
+    max-substitution-jobs = 128;
+    http-connections = 128;
+    connect-timeout = 5;
+    stalled-download-timeout = 90;
+    download-attempts = 5;
+
+    # Enable experimental features
+    experimental-features = [ "nix-command" "flakes" ];
+
+    # Keep outputs for offline work
+    keep-outputs = true;
+    keep-derivations = true;
+
+    # Fallback behavior
+    fallback = true;
+    warn-dirty = false;
+  };
+
   inputs = {
     # Core inputs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";

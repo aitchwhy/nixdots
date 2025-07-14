@@ -24,6 +24,10 @@
         "https://devenv.cachix.org"
         "https://cuda-maintainers.cachix.org"
         "https://nixpkgs-python.cachix.org"
+        "https://nixpkgs-unfree.cachix.org"
+        "https://numtide.cachix.org"
+        "https://nix-on-droid.cachix.org"
+        "https://mic92.cachix.org"
       ];
 
       trusted-public-keys = [
@@ -32,6 +36,10 @@
         "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
         "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
         "nixpkgs-python.cachix.org-1:hxjI7pFxTyuTHn2NkvWCrAUcNZLNS3ZAvfYNuYifcEU="
+        "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
+        "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
+        "nix-on-droid.cachix.org-1:56snoMJTXmDRC1Ei24CmKoUqvHJ9XCp+nidK7qkMQrU="
+        "mic92.cachix.org-1:gi8IhgiT3CYZnJsaW7fxznzTkMUOn1RY4GmXdT/nXYQ="
       ];
 
       # Performance tuning
@@ -63,7 +71,9 @@
 
       # Network settings
       connect-timeout = 5; # Faster timeout for unresponsive substituters
-      download-attempts = 3; # Retry failed downloads
+      download-attempts = 5; # Retry failed downloads
+      stalled-download-timeout = 90; # Wait longer for stalled downloads
+      http2 = true; # Enable HTTP/2 for better performance
 
       # Security
       allowed-users = [ "*" ]; # All users can use Nix
@@ -73,14 +83,21 @@
       build-users-group = lib.mkIf pkgs.stdenv.isDarwin "nixbld";
 
       # Additional performance settings
-      narinfo-cache-negative-ttl = 0; # Don't cache missing paths
-      narinfo-cache-positive-ttl = 3600; # Cache found paths for 1 hour
+      narinfo-cache-negative-ttl = 3600; # Cache missing paths for 1 hour
+      narinfo-cache-positive-ttl = 86400; # Cache found paths for 24 hours
+
+      # Connection pooling for better performance
+      keep-env-derivations = true;
+      keep-failed = true; # Keep failed builds for debugging
+
+      # Build performance
+      build-poll-interval = 1; # Check build status more frequently
     };
 
-    # Garbage collection - more aggressive for development
+    # Garbage collection - balanced for development and caching
     gc = {
       automatic = true;
-      options = "--delete-older-than 7d --max-freed $((50 * 1024**3))"; # 7 days or 50GB max
+      options = "--delete-older-than 30d --max-freed $((100 * 1024**3))"; # 30 days or 100GB max
       dates = lib.mkIf pkgs.stdenv.isLinux "weekly";
       interval = lib.mkIf pkgs.stdenv.isDarwin {
         Hour = 3;
@@ -119,9 +136,16 @@
       # Flake UX improvements
       bash-prompt-prefix = (nix:$name)\040
 
-      # Store paths
-      pre-build-hook =
-      post-build-hook =
+      # Cache warming hooks
+      pre-build-hook = 
+      post-build-hook = ${pkgs.writeScript "nix-post-build-hook" ''
+        #!/bin/sh
+        set -euf
+        export IFS=' '
+        
+        # Log builds for cache analysis
+        echo "Built: $OUT_PATHS" >> /tmp/nix-builds.log
+      ''}
 
       # Additional experimental features
       plugin-files =
