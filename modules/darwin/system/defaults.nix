@@ -1,5 +1,5 @@
 # macOS system-wide defaults
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 with lib;
 

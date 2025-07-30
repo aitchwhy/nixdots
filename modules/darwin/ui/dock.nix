@@ -1,5 +1,5 @@
 # macOS Dock configuration
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 with lib;
 

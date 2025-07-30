@@ -1,5 +1,5 @@
 # Home Manager module aggregator
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 with lib;
 

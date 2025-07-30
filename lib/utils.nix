@@ -10,7 +10,7 @@ rec {
   mkIfHome = condition: content: mkIf (condition && (config.home or false)) content;
 
   # Filter enabled items from an attribute set
-  filterEnabled = attrs: filterAttrs (n: v: v.enable or false) attrs;
+  filterEnabled = attrs: filterAttrs (_n: v: v.enable or false) attrs;
 
   # Merge lists with deduplication
   mergeLists = lists: unique (flatten lists);

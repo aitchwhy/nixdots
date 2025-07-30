@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, ... }:
 {
   # System-level Nix configuration
   nix = {
@@ -163,7 +163,7 @@
       allowBroken = false;
 
       # Package overrides for better defaults
-      packageOverrides = pkgs: {
+      packageOverrides = _pkgs: {
         # Add any global package overrides here
       };
 

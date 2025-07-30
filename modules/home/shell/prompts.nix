@@ -1,5 +1,5 @@
 # Shell prompt configuration (Starship)
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 with lib;
 

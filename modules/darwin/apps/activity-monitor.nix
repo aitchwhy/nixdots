@@ -1,5 +1,5 @@
 # Activity Monitor configuration
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 with lib;
 

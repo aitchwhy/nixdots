@@ -4,7 +4,7 @@
 # - Cloud platform CLIs and infrastructure tools
 # - User-specific Git configuration
 # - Personal productivity tools
-{ config, pkgs, lib, inputs, self, ... }:
+{ pkgs, self, ... }:
 {
   # Import home modules
   imports = [ self.homeModules.default ];

@@ -3,7 +3,7 @@
 # - Machine-specific network configuration
 # - Hardware-specific tools and optimizations
 # - Machine-specific services (e.g., Tailscale)
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   networking.hostName = "hank-mbp-m4";
   networking.computerName = "Hank's MacBook Pro";

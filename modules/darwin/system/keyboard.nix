@@ -1,5 +1,5 @@
 # macOS keyboard configuration
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 with lib;
 
